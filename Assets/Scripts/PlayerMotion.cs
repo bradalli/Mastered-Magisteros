@@ -14,16 +14,22 @@ namespace Mastered.Magisteros
         float mouseInputX, mouseInputY;
 
         [Header("Movement Variables")]
-        [SerializeField] float gravityScale;
-        [SerializeField] float walkSpeed, runSpeed;
+        [SerializeField] float walkSpeed;
+        [SerializeField] float runSpeed;
         Vector3 gravityVector;
         CharacterController characterController;
         bool isRunning;
 
-        [Header("Jump Variables")]
+        [Header("Jump and Gravity Variables")]
+        [SerializeField] float gravityScale;
         [SerializeField] float jumpForce;
+        Vector3 playerYVelocity;
 
-        // Start is called before the first frame update
+        [Header("Camera Raycast Variables")]
+        [SerializeField] float raycastDistance;
+        [SerializeField] LayerMask raycastLayerMask;
+        RaycastHit raycastHitResult;
+
         void Start()
         {
             playerCamera = gameObject.GetComponentInChildren<Camera>();
@@ -31,12 +37,12 @@ namespace Mastered.Magisteros
             gravityVector = Physics.gravity;
         }
 
-        // Update is called once per frame
         void Update()
         {
             CameraLook();
-            Movement();
             JumpAndGravity();
+            Movement();
+            CameraRaycast();
         }
 
         void CameraLook()
@@ -50,18 +56,32 @@ namespace Mastered.Magisteros
             playerCamera.transform.localEulerAngles = new Vector3(mouseInputY, 0, 0);
             transform.eulerAngles = new Vector3(0, mouseInputX, 0);
         }
-
         void Movement()
         {
             Vector3 movementVector = (transform.right * Input.GetAxis("Horizontal")) + (transform.forward * Input.GetAxis("Vertical"));
             isRunning = Input.GetButton("Run");
 
-            characterController.Move((movementVector.normalized * (isRunning ? runSpeed : walkSpeed))* Time.deltaTime);
+            characterController.Move((movementVector.normalized * (isRunning ? runSpeed : walkSpeed) + playerYVelocity) * Time.deltaTime);
         }
-
         void JumpAndGravity()
         {
+            //Jump button pressed and player is grounded
+            if (Input.GetButtonDown("Jump") && characterController.isGrounded)
+            {
+                Debug.Log("here");
+                playerYVelocity.y = jumpForce;
+            }
 
+            playerYVelocity.y += (gravityVector.y * gravityScale);
+            //characterController.Move(playerYVelocity * Time.deltaTime);
+        }
+        void CameraRaycast()
+        {
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out raycastHitResult, raycastDistance, raycastLayerMask);
+                if (raycastHitResult.collider) { Debug.Log("Object hit: " + raycastHitResult.collider.name + " of layer:" + raycastHitResult.collider.gameObject.layer); }
+            }
         }
     }
 }

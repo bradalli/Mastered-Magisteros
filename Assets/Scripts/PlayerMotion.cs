@@ -70,7 +70,6 @@ namespace Mastered.Magisteros
             // Perform a sphere cast using the dimensions of the character controller, and exclude the layer named "Player" i.e. layer 9.
             bool isPlayerGrounded = Physics.SphereCast(transform.position, characterController.radius * .99f, Vector3.down, out sphereCastHitResult, 
                 characterController.height * 0.525f, ~(1 << 9));
-            Debug.Log(isPlayerGrounded);
 
             return isPlayerGrounded;
         }

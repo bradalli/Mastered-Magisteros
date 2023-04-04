@@ -61,19 +61,31 @@ namespace Mastered.Magisteros
             Vector3 movementVector = (transform.right * Input.GetAxis("Horizontal")) + (transform.forward * Input.GetAxis("Vertical"));
             isRunning = Input.GetButton("Run");
 
-            characterController.Move((movementVector.normalized * (isRunning ? runSpeed : walkSpeed) + playerYVelocity) * Time.deltaTime);
+            characterController.Move(movementVector.normalized * (isRunning ? runSpeed : walkSpeed) * Time.deltaTime);
         }
+        //Custom is player grounded check, Unity's character controller solution was having issues.
+        bool IsPlayerGrounded()
+        {
+            RaycastHit sphereCastHitResult;
+            // Perform a sphere cast using the dimensions of the character controller, and exclude the layer named "Player" i.e. layer 9.
+            bool isPlayerGrounded = Physics.SphereCast(transform.position, characterController.radius * .99f, Vector3.down, out sphereCastHitResult, 
+                characterController.height * 0.525f, ~(1 << 9));
+            Debug.Log(isPlayerGrounded);
+
+            return isPlayerGrounded;
+        }
+
         void JumpAndGravity()
         {
             //Jump button pressed and player is grounded
-            if (Input.GetButtonDown("Jump") && characterController.isGrounded)
+            if (Input.GetButtonDown("Jump") && IsPlayerGrounded())
             {
                 Debug.Log("here");
                 playerYVelocity.y = jumpForce;
             }
 
-            playerYVelocity.y += (gravityVector.y * gravityScale);
-            //characterController.Move(playerYVelocity * Time.deltaTime);
+            playerYVelocity.y += (gravityVector.y * gravityScale * Time.deltaTime);
+            characterController.Move(playerYVelocity * Time.deltaTime);
         }
         void CameraRaycast()
         {

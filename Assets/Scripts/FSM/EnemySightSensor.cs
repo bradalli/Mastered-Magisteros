@@ -28,7 +28,7 @@ namespace Mastered.Magisteros.Brad
             var dir = new Vector3(_ray.direction.x, 0, _ray.direction.z);
 
             var angle = Vector3.Angle(dir, this.transform.forward);
-
+            
             if (angle > viewAngle)
                 return false;
 
@@ -36,9 +36,10 @@ namespace Mastered.Magisteros.Brad
             {
                 return false;
             }
-
-            if(hit.collider.tag == "Player")
+            
+            if (hit.collider.tag == "Player")
             {
+                Debug.Log("PLAYER SEEN");
                 return true;
             }
 

@@ -8,11 +8,21 @@ namespace Mastered.Magisteros.Brad
     public class BaseStateMachine : MonoBehaviour
     {
         [SerializeField] private BaseState _initialState;
-        private Dictionary<Type, Component> _cachedComponents;
+        private Dictionary<Type, Component> _cachedComponents = new Dictionary<Type, Component>();
 
         private void Awake()
         {
             CurrentState = _initialState;
+            /*foreach(Component component in this.GetComponents<Component>())
+            {
+                
+            }*/
+
+            Component[] components = gameObject.GetComponents(typeof(Component));
+            foreach (Component component in components)
+            {
+                _cachedComponents.Add(component.GetType(), component);
+            }
         }
 
         public BaseState CurrentState { get; set; }
@@ -22,10 +32,12 @@ namespace Mastered.Magisteros.Brad
             CurrentState.Execute(this);
         }
 
+        
         public new T GetComponent<T>() where T : Component
         {
             if (_cachedComponents.ContainsKey(typeof(T)))
                 return _cachedComponents[typeof(T)] as T;
+
 
             var component = base.GetComponent<T>();
             if (component != null)

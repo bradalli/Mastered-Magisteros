@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace Mastered.Magisteros
+namespace Mastered.Magisteros.Brad
 {
     public class PlayerMotion : MonoBehaviour
     {

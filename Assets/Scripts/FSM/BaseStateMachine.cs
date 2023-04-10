@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mastered.Magisteros.Brad
+namespace Mastered.Magisteros.FSM
 {
     public class BaseStateMachine : MonoBehaviour
     {
@@ -13,10 +13,6 @@ namespace Mastered.Magisteros.Brad
         private void Awake()
         {
             CurrentState = _initialState;
-            /*foreach(Component component in this.GetComponents<Component>())
-            {
-                
-            }*/
 
             Component[] components = gameObject.GetComponents(typeof(Component));
             foreach (Component component in components)

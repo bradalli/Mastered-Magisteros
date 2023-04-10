@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Mastered.Magisteros.Brad
+namespace Mastered.Magisteros.FSM.Tutorial
 {
     [CreateAssetMenu(menuName = "FSM/Actions/Patrol")]
     public class PatrolAction : FSMAction

@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mastered.Magisteros.FSM;
 
-namespace Mastered.Magisteros.Brad
+namespace Mastered.Magisteros
 {
     public class EnemySightSensor : MonoBehaviour
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mastered.Magisteros.Brad
+namespace Mastered.Magisteros.FSM
 {
     [CreateAssetMenu(menuName = "FSM/State")]
     public sealed class State : BaseState

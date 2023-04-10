@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Mastered.Magisteros.Brad
+namespace Mastered.Magisteros.FSM
 {
     public class PatrolPoints : MonoBehaviour
     {

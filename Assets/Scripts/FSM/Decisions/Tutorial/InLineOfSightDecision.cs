@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mastered.Magisteros.Brad
+namespace Mastered.Magisteros.FSM.Tutorial
 {
     [CreateAssetMenu(menuName = "FSM/Decisions/In Line Of Sight")]
     public class InLineOfSightDecision : Decision

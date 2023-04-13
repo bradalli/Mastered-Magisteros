@@ -2,29 +2,42 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
-
+using Mastered.Magisteros.BTwGraph;
+using UnityEditor.Callbacks;
 
 public class BTEditor : EditorWindow
 {
-    [MenuItem("Window/UI Toolkit/BTEditor")]
-    public static void ShowExample()
+    [MenuItem("Window/Behaviour Tree/Editor")]
+    public static void OpenTreeEditor()
     {
-        BTEditor wnd = GetWindow<BTEditor>();
-        wnd.titleContent = new GUIContent("BTEditor");
+        GetWindow<BTEditor>("Behaviour Tree Editor");
     }
 
     public void CreateGUI()
     {
-        // Each editor window contains a root VisualElement object
-        VisualElement root = rootVisualElement;
+        VisualTreeAsset visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(
+            "Assets/Scripts/BTwGraph/BehaviourTreeEditor/BTEditor.xml");
+        visualTree.CloneTree(rootVisualElement);
+    }
 
-        // VisualElements objects can contain other VisualElement following a tree hierarchy.
-        VisualElement label = new Label("Hello World! From C#");
-        root.Add(label);
+    private void OnSelectionChange()
+    {
+        BehaviourTree tree = Selection.activeObject as BehaviourTree;
+        if (tree != null) 
+        {
+            SerializedObject so = new SerializedObject(tree);
+            rootVisualElement.Unbind();
+        }
+        else 
+        {
+            rootVisualElement.Unbind();
 
-        // Import UXML
-        var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Scripts/BT w Graph/BehaviourTreeEditor/BTEditor.uxml");
-        VisualElement labelFromUXML = visualTree.Instantiate();
-        
+            TextField textField = rootVisualElement.Q<TextField>("BehaviourTreeName");
+            if(textField != null)
+            {
+                textField.value = string.Empty;
+            }
+        }
+
     }
 }

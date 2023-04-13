@@ -15,7 +15,7 @@ namespace Mastered.Magisteros.BT
     public class Node
     {
         protected NodeState state;
-
+        [HideInInspector]
         public Node parent;
         protected List<Node> children = new List<Node>();
 

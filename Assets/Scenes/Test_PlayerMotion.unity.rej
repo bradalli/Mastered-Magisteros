@@ -1,9 +1,0 @@
-diff a/Assets/Scenes/Test_PlayerMotion.unity b/Assets/Scenes/Test_PlayerMotion.unity	(rejected hunks)
-@@ -815,6 +815,7 @@
-   - component: {fileID: 336437643}
-   - component: {fileID: 336437642}
-   - component: {fileID: 336437646}
-+  m_Layer: 0
-   m_Name: Player
-   m_TagString: Untagged
-   m_Icon: {fileID: 0}

@@ -1,4 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
-    <Style src="project://database/Assets/Scripts/BT%20w%20Graph/BehaviourTreeEditor/BTEditor.uss?fileID=7433441132597879392&amp;guid=ece441779312f844d97ceb7db8866619&amp;type=3#BTEditor" />
-    <ui:TextField picking-mode="Ignore" label="Text Field" value="filler text" text="filler text" name="BehaviourTreeName" binding-path="m_Name" />
-</ui:UXML>

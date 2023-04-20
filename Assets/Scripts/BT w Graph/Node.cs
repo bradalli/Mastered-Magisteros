@@ -15,6 +15,8 @@ namespace Mastered.Magisteros.BTwGraph
 
         [SerializeField] private State state = State.Running;
         [SerializeField] private bool started;
+        public string guid;
+        public Vector2 position;
 
         ///<summary>
         /// Runs when the Node first starts running.

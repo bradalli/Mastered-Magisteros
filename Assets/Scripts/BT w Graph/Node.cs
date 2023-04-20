@@ -13,10 +13,10 @@ namespace Mastered.Magisteros.BTwGraph
             Failure
         }
 
-        [SerializeField] private State state = State.Running;
-        [SerializeField] private bool started;
-        public string guid;
-        public Vector2 position;
+        [HideInInspector] [SerializeField] private State state = State.Running;
+        [HideInInspector] [SerializeField] private bool started;
+        [HideInInspector] public string guid;
+        [HideInInspector] public Vector2 position;
 
         ///<summary>
         /// Runs when the Node first starts running.
@@ -51,6 +51,11 @@ namespace Mastered.Magisteros.BTwGraph
             OnStop();
             started = false;
             return state;
+        }
+
+        public virtual Node Clone()
+        {
+            return Instantiate(this);
         }
     }
 }

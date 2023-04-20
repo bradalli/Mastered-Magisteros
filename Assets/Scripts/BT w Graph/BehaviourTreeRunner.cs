@@ -6,9 +6,11 @@ namespace Mastered.Magisteros.BTwGraph
 {
     public class BehaviourTreeRunner : MonoBehaviour
     {
-        [SerializeField] private BehaviourTree tree;
+        public BehaviourTree tree;
         void Start()
         {
+            #region Hard-Coded BT Example
+            /*
             tree = ScriptableObject.CreateInstance<BehaviourTree>();
 
             DebugLogNode log1 = ScriptableObject.CreateInstance<DebugLogNode>();
@@ -38,6 +40,10 @@ namespace Mastered.Magisteros.BTwGraph
             loop.child = sequence;
 
             tree.rootNode = loop;
+            */
+            #endregion
+
+            tree = tree.Clone();
         }
 
         void Update()

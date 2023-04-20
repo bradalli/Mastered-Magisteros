@@ -46,9 +46,12 @@ namespace Mastered.Magisteros.BTwGraph
 
         public void DeleteNode(Node node)
         {
-            nodes.Remove(node);
-            AssetDatabase.RemoveObjectFromAsset(node);
-            AssetDatabase.SaveAssets();
+            if(node != rootNode)
+            {
+                nodes.Remove(node);
+                AssetDatabase.RemoveObjectFromAsset(node);
+                AssetDatabase.SaveAssets();
+            }
         }
 
         public void AddChild(Node parent, Node child)
@@ -56,6 +59,10 @@ namespace Mastered.Magisteros.BTwGraph
             DecoratorNode decorator = parent as DecoratorNode;
             if (decorator)
                 decorator.child = child;
+
+            RootNode rootNode = parent as RootNode;
+            if (rootNode)
+                rootNode.child = child;
 
             CompositeNode composite = parent as CompositeNode;
             if (composite)
@@ -67,6 +74,10 @@ namespace Mastered.Magisteros.BTwGraph
             DecoratorNode decorator = parent as DecoratorNode;
             if (decorator)
                 decorator.child = null;
+
+            RootNode rootNode = parent as RootNode;
+            if (rootNode)
+                rootNode.child = null;
 
             CompositeNode composite = parent as CompositeNode;
             if (composite)
@@ -81,11 +92,22 @@ namespace Mastered.Magisteros.BTwGraph
             if (decorator && decorator.child != null)
                 children.Add(decorator.child);
 
+            RootNode rootNode = parent as RootNode;
+            if (rootNode && rootNode.child != null)
+                children.Add(rootNode.child);
+
             CompositeNode composite = parent as CompositeNode;
             if (composite)
                 return composite.children;
 
             return children;
+        }
+
+        public BehaviourTree Clone()
+        {
+            BehaviourTree tree = Instantiate(this);
+            tree.rootNode = tree.rootNode.Clone();
+            return tree;
         }
     }
 }

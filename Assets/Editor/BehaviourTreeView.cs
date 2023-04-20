@@ -9,9 +9,11 @@ using Unity.VisualScripting;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using System;
 using System.Linq;
+using Node = UnityEditor.Experimental.GraphView.Node;
 
 public class BehaviourTreeView : GraphView
 {
+    public Action<NodeView> OnNodeSelected;
     public new class UxmlFactory : UxmlFactory<BehaviourTreeView, GraphView.UxmlTraits> { }
     BehaviourTree tree;
     public BehaviourTreeView()
@@ -27,6 +29,11 @@ public class BehaviourTreeView : GraphView
         styleSheets.Add(styleSheet);
     }
 
+    NodeView FindNodeView(Mastered.Magisteros.BTwGraph.Node node)
+    {
+        return GetNodeByGuid(node.guid) as NodeView;
+    }
+
     internal void PopulateView(BehaviourTree tree)
     {
         this.tree = tree;
@@ -35,7 +42,28 @@ public class BehaviourTreeView : GraphView
         DeleteElements(graphElements);
         graphViewChanged += OnGraphViewChanged;
 
+        if(tree.rootNode == null)
+        {
+            tree.rootNode = tree.CreateNode(typeof(RootNode)) as RootNode;
+            EditorUtility.SetDirty(tree);
+            AssetDatabase.SaveAssets();
+        }
+
+        // Creates node views
         tree.nodes.ForEach(n => CreateNodeView(n));
+
+        // Creates edges
+        tree.nodes.ForEach(n => {
+            var children = tree.GetChildren(n);
+            children.ForEach(c =>
+            {
+                NodeView parentView = FindNodeView(n);
+                NodeView childView = FindNodeView(c);
+
+                UnityEditor.Experimental.GraphView.Edge edge = parentView.output.ConnectTo(childView.input);
+                AddElement(edge);
+            });
+        });
     }
 
     public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
@@ -54,7 +82,16 @@ public class BehaviourTreeView : GraphView
                 NodeView nodeView = elem as NodeView;
                 if (nodeView != null)
                     tree.DeleteNode(nodeView.node);
-            });
+
+                UnityEditor.Experimental.GraphView.Edge edge = elem as UnityEditor.Experimental.GraphView.Edge;
+                if (edge != null)
+                {
+                    NodeView parentView = edge.output.node as NodeView;
+                    NodeView childView = edge.input.node as NodeView;
+                    tree.RemoveChild(parentView.node, childView.node);
+                }
+            }
+            );
         }
 
         if(graphViewChange.edgesToCreate != null)
@@ -107,6 +144,7 @@ public class BehaviourTreeView : GraphView
     void CreateNodeView(Mastered.Magisteros.BTwGraph.Node node)
     {
         NodeView nodeView = new NodeView(node);
+        nodeView.OnNodeSelected = OnNodeSelected;
         AddElement(nodeView);
     }
 }

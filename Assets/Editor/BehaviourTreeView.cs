@@ -27,14 +27,6 @@ public class BehaviourTreeView : GraphView
 
         var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTreeEditor.uss");
         styleSheets.Add(styleSheet);
-
-        Undo.undoRedoPerformed += OnUndoRedo;
-    }
-
-    private void OnUndoRedo()
-    {
-        PopulateView(tree);
-        AssetDatabase.SaveAssets();
     }
 
     NodeView FindNodeView(Mastered.Magisteros.BTwGraph.Node node)
@@ -112,14 +104,6 @@ public class BehaviourTreeView : GraphView
             });
         }
 
-        if(graphViewChange.movedElements != null)
-        {
-            nodes.ForEach((n) =>
-            {
-                NodeView view = n as NodeView;
-                view.SortChildren();
-            });
-        }
         return graphViewChange;
     }
 
@@ -157,12 +141,10 @@ public class BehaviourTreeView : GraphView
         CreateNodeView(node);
     }
 
-
     void CreateNodeView(Mastered.Magisteros.BTwGraph.Node node)
     {
         NodeView nodeView = new NodeView(node);
         nodeView.OnNodeSelected = OnNodeSelected;
-        tree.nodes = new List<Mastered.Magisteros.BTwGraph.Node>();
         AddElement(nodeView);
     }
 }

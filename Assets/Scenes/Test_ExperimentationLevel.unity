@@ -1737,6 +1737,8 @@ MonoBehaviour:
   isATaskBeingPerformed: 0
   isInCombat: 0
   areWaypointsRemaining: 0
+  currentTask: 0
+  taskPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &688129241
 GameObject:
   m_ObjectHideFlags: 0

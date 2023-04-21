@@ -17,6 +17,7 @@ namespace Mastered.Magisteros.BTwGraph
         [HideInInspector] [SerializeField] private bool started;
         [HideInInspector] public string guid;
         [HideInInspector] public Vector2 position;
+        [HideInInspector] public Transform runnerGmob;
 
         ///<summary>
         /// Runs when the Node first starts running.

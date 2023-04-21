@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da06ad5045580c5419186b48ad87c85f, type: 3}
+  m_Name: GoToLastWPTransition
+  m_EditorClassIdentifier: 
+  Decision: {fileID: 11400000, guid: 22365cb6477927345b39ea1292664c53, type: 2}
+  TrueState: {fileID: 11400000, guid: 6a055ff693703824596c799fe59fd55f, type: 2}
+  FalseState: {fileID: 11400000, guid: 6971e5cd90b6c8b44a64b0204d9d2e7c, type: 2}

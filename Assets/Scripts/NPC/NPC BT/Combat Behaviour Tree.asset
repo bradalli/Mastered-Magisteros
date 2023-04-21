@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d285eb63c2cdd74180de7cfceaa96ad, type: 3}
+  m_Name: Combat Behaviour Tree
+  m_EditorClassIdentifier: 
+  rootNode:
+    rid: 3599090168781340674
+  nodes:
+  - rid: 3599090168781340674
+  - rid: 3599090168781340679
+  - rid: 3599090168781340681
+  - rid: 3599090168781340682
+  - rid: 3599090168781340689
+  treeState: 0
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+  viewPosition: {x: 279, y: 58, z: 0}
+  viewScale: {x: 1, y: 1, z: 1}
+  references:
+    version: 2
+    RefIds:
+    - rid: 3599090168781340674
+      type: {class: RootNode, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: ad30b526-78c5-4318-a566-e5a52fddef5e
+        position: {x: 0, y: -146.28}
+        blackboard:
+          moveToPosition: {x: 0, y: 0, z: 0}
+        description: 
+        drawGizmos: 0
+        child:
+          rid: 3599090168781340689
+    - rid: 3599090168781340679
+      type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: b72bb3ee488351e41a9e948b51ee5294
+        position: {x: 0, y: 153}
+        blackboard:
+          moveToPosition: {x: 0, y: 0, z: 0}
+        description: 
+        drawGizmos: 0
+        children:
+        - rid: 3599090168781340681
+        - rid: 3599090168781340682
+    - rid: 3599090168781340681
+      type: {class: Wait, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: de53aa5de49c69f428e6a4bbe4fcda42
+        position: {x: -108, y: 313}
+        blackboard:
+          moveToPosition: {x: 0, y: 0, z: 0}
+        description: 
+        drawGizmos: 0
+        duration: 1
+    - rid: 3599090168781340682
+      type: {class: Log, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 4299f6983d7bb3a40917c3346b524b88
+        position: {x: 94, y: 313}
+        blackboard:
+          moveToPosition: {x: 0, y: 0, z: 0}
+        description: 
+        drawGizmos: 0
+        message: Combat Message
+    - rid: 3599090168781340689
+      type: {class: Repeat, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 8ff388a3eb95a8a44b984d315b90c000
+        position: {x: 0, y: 1}
+        blackboard:
+          moveToPosition: {x: 0, y: 0, z: 0}
+        description: 
+        drawGizmos: 0
+        child:
+          rid: 3599090168781340679
+        restartOnSuccess: 1
+        restartOnFailure: 0

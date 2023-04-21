@@ -1,3 +1,4 @@
+using Mastered.Magisteros.BTwGraph;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +10,11 @@ public class CharacterInfo : MonoBehaviour
     [SerializeField] bool isATaskBeingPerformed;
     [SerializeField] bool isInCombat;
     [SerializeField] bool areWaypointsRemaining;
+    public Task currentTask;
+    public Vector3 taskPosition;
+    internal GameObject viewTarget;
+
+    public enum Task { Idle, Talk, Animation}
 
     private void Update()
     {

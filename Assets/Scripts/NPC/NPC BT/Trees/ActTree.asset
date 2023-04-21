@@ -1,0 +1,135 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3728502580104218181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6b9662c8a1278c45a65f962a15c0d8c, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: c0806661f94f28e48937ebc6fb275111
+  position: {x: 485, y: -38}
+  runnerGmob: {fileID: 0}
+  children:
+  - {fileID: 1145635460555519908}
+  - {fileID: -914497363596752650}
+--- !u!114 &-3151389884284884833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3086c25d64b84144ab304ab2f203dfa9, type: 3}
+  m_Name: FallBackNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 0d1838dd9759e004fb516084b75cf630
+  position: {x: 200, y: 78}
+  runnerGmob: {fileID: 0}
+  children:
+  - {fileID: -3728502580104218181}
+--- !u!114 &-914497363596752650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8bbb3f42087a4946aa643c3fdd266de, type: 3}
+  m_Name: DebugLogNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 19864bc463e30514e8aab8f416814583
+  position: {x: 699, y: 23}
+  runnerGmob: {fileID: 0}
+  message: Tag IS idle.
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29573b89c17e5de41833ecde286871d1, type: 3}
+  m_Name: ActTree
+  m_EditorClassIdentifier: 
+  rootNode: {fileID: 3994724566406489706}
+  treeState: 0
+  nodes:
+  - {fileID: 3994724566406489706}
+  - {fileID: -3151389884284884833}
+  - {fileID: -3728502580104218181}
+  - {fileID: 1145635460555519908}
+  - {fileID: -914497363596752650}
+  - {fileID: 5682326157842469839}
+  runnerGmob: {fileID: 0}
+--- !u!114 &1145635460555519908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9b9a8a3b85c3004892ee4345d7c4249, type: 3}
+  m_Name: IsTargetTagEqualTo
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: b4797e5055eacc54090485712546b976
+  position: {x: 699, y: -76.5}
+  runnerGmob: {fileID: 0}
+  tagToCompare: 
+--- !u!114 &3994724566406489706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77ba24fa3c0c28e44847b40c3d1e601e, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 92df2d40a29499d42bd726711aaf96db
+  position: {x: -8, y: 86.5}
+  runnerGmob: {fileID: 0}
+  child: {fileID: -3151389884284884833}
+--- !u!114 &5682326157842469839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8bbb3f42087a4946aa643c3fdd266de, type: 3}
+  m_Name: DebugLogNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: d41bb66cfa840044c97132b7f94dcf0d
+  position: {x: 442.75003, y: 139.15005}
+  runnerGmob: {fileID: 0}
+  message: Tag is NOT idle.

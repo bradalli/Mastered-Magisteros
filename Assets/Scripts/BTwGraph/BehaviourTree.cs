@@ -12,6 +12,7 @@ namespace Mastered.Magisteros.BTwGraph
         public Node rootNode;
         public Node.State treeState = Node.State.Running;
         public List<Node> nodes = new List<Node>();
+        public GameObject runnerGmob;
 
         public Node.State Update()
         {

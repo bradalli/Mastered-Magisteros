@@ -10,11 +10,10 @@ public class AggravatedDecision : Decision
     public override bool Decide(BaseStateMachine stateMachine)
     {
         bool decision = false;
-        #region For Testing Purposes
-        decision = Input.GetKeyDown(debugAdvanceKey);
-        #endregion
         // var characterInSight = stateMachine.GetComponent<CharacterSight>();
         // decision = characterInSight.Ping() && characterInSight.IsEnemyInSight();
+        var characterInfo = stateMachine.GetComponent<CharacterInfo>();
+        decision = characterInfo.InCombat();
         return decision;
     }
 }

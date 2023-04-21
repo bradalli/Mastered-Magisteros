@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Mastered.Magisteros.FSM;
-using TheKiwiCoder;
+using Mastered.Magisteros.BTwGraph;
 
 [CreateAssetMenu(menuName = "FSM/Actions/ChangeBTAction")]
 public class ChangeBTAction : FSMAction
@@ -12,10 +12,11 @@ public class ChangeBTAction : FSMAction
     public override void Execute(BaseStateMachine stateMachine)
     {
         var behaviourTreeRunner = stateMachine.GetComponent<BehaviourTreeRunner>();
-        if (behaviourTreeRunner.tree == null ^ behaviourTreeRunner.tree.GetType() != newTree.GetType())
+        if (behaviourTreeRunner.lastTree != newTree)
         {
             Debug.Log($"Behaviour tree has changed from {behaviourTreeRunner.tree.name} to {newTree.name} at... {Time.time}");
-            behaviourTreeRunner.tree = Instantiate(newTree) as BehaviourTree;
-        } 
+            behaviourTreeRunner.tree = newTree.Clone();
+            behaviourTreeRunner.lastTree = newTree;
+        }
     }
 }

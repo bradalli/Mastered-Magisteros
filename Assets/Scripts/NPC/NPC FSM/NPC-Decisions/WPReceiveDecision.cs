@@ -10,11 +10,8 @@ public class WPReceiveDecision : Decision
     public override bool Decide(BaseStateMachine stateMachine)
     {
         bool decision = false;
-        #region For Testing Purposes
-        decision = Input.GetKeyDown(debugAdvanceKey);
-        #endregion
-        // var characterInfo = stateMachine.GetComponent<CharacterInfo>();
-        // decision = characterInfo.AreWaypointsRemaining() && !characterInfo.IsATaskBeingPerformed();
+        var characterInfo = stateMachine.GetComponent<CharacterInfo>();
+        decision = characterInfo.AreWaypointsRemaining() && !characterInfo.IsATaskBeingPerformed();
         return decision;
     }
 }

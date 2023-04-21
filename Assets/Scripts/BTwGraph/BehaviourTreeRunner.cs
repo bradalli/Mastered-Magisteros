@@ -7,6 +7,7 @@ namespace Mastered.Magisteros.BTwGraph
     public class BehaviourTreeRunner : MonoBehaviour
     {
         public BehaviourTree tree;
+        public BehaviourTree lastTree;
         void Start()
         {
             #region Hard-Coded BT Example

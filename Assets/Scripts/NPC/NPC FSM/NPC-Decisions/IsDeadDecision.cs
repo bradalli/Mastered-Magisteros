@@ -10,11 +10,8 @@ public class IsDeadDecision : Decision
     public override bool Decide(BaseStateMachine stateMachine)
     {
         bool decision = false;
-        #region For Testing Purposes
-        decision = Input.GetKeyDown(debugAdvanceKey);
-        #endregion
-        // var characterInfo = stateMachine.GetComponent<CharacterInfo>();
-        // decision = characterInfo.IsDead();
+        var characterInfo = stateMachine.GetComponent<CharacterInfo>();
+        decision = characterInfo.IsDead();
         return decision;
     }
 }

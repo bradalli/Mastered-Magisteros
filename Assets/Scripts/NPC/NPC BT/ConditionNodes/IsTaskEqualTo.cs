@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mastered.Magisteros.NPC;
 
 namespace Mastered.Magisteros.BTwGraph
 {
     public class IsTaskEqualTo : ConditionNode
     {
-        public CharacterInfo.Task taskToCompare;
+        public CharacterInformation.Task taskToCompare;
 
         #region Overrides of Node
 
@@ -16,7 +17,7 @@ namespace Mastered.Magisteros.BTwGraph
 
         protected override State OnUpdate()
         {
-            if(runnerGmob.TryGetComponent<CharacterInfo>(out CharacterInfo CI))
+            if(runnerGmob.TryGetComponent<CharacterInformation>(out CharacterInformation CI))
             {
                 if (CI.currentTask == taskToCompare)
                     return State.Success;

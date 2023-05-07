@@ -1,3 +1,4 @@
+using Mastered.Magisteros.NPC;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +17,7 @@ namespace Mastered.Magisteros.BTwGraph
 
         protected override State OnUpdate()
         {
-            if (runnerGmob.TryGetComponent<CharacterInfo>(out CharacterInfo CI))
+            if (runnerGmob.TryGetComponent<CharacterInformation>(out CharacterInformation CI))
             {
                 if (CI.viewTarget != null && CI.viewTarget.CompareTag(tagToCompare))
                     return State.Success;

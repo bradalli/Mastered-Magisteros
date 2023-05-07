@@ -1,3 +1,4 @@
+using Mastered.Magisteros.NPC;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,9 +17,9 @@ namespace Mastered.Magisteros.BTwGraph
 
         protected override State OnUpdate()
         {
-            if (runnerGmob.TryGetComponent<CharacterInfo>(out CharacterInfo CI))
+            if (runnerGmob.TryGetComponent<CharacterInformation>(out CharacterInformation CI))
             {
-                if (CI.currentTask != CharacterInfo.Task.Idle && Vector3.Distance(CI.taskPosition, CI.transform.position) <= range)
+                if (CI.currentTask != CharacterInformation.Task.Idle && Vector3.Distance(CI.taskPosition, CI.transform.position) <= range)
                     return State.Success;
             }
             return State.Failure;

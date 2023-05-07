@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mastered.Magisteros.FSM;
+using Mastered.Magisteros.NPC;
 
 [CreateAssetMenu(menuName = "FSM/Decisions/AggravatedDecision")]
 public class AggravatedDecision : Decision
@@ -12,7 +13,7 @@ public class AggravatedDecision : Decision
         bool decision = false;
         // var characterInSight = stateMachine.GetComponent<CharacterSight>();
         // decision = characterInSight.Ping() && characterInSight.IsEnemyInSight();
-        var characterInfo = stateMachine.GetComponent<CharacterInfo>();
+        var characterInfo = stateMachine.GetComponent<CharacterInformation>();
         decision = characterInfo.InCombat();
         return decision;
     }

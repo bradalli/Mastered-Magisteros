@@ -1,0 +1,119 @@
+using Mastered.Magisteros.BTwGraph;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Mastered.Magisteros.NPC
+{
+    public class CharacterInformation : MonoBehaviour
+    {
+        #region Public variables
+
+        [Header("Character Profile")]
+        public Personality personality = Personality.Friendly;
+        public string characterName = "NotYetAssigned";
+        public UnityEngine.Object meshPrefab = null;
+
+        public enum Personality { Friendly, Hostile, Fearful }
+
+        [Header("Status Information")]
+        public bool isDead;
+        public bool isATaskBeingPerformed;
+        public bool isInCombat;
+        public bool areWaypointsRemaining;
+
+        [Header("Task Information")]
+        public Task currentTask;
+        public Vector3 taskPosition;
+        public Transform viewTarget;
+
+        public enum Task { Idle, Talk, Animation }
+
+        #endregion
+
+        #region Private variables
+
+        Transform meshParentTransform;
+
+        #endregion
+
+        #region Monobehaviour methods
+
+        private void Awake()
+        {
+            meshParentTransform = transform.Find("Mesh");
+        }
+
+        private void Update()
+        {
+            #region For Testing Purposes
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+                isDead = !isDead;
+
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+                isATaskBeingPerformed = !isATaskBeingPerformed;
+
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+                isInCombat = !isInCombat;
+
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+                areWaypointsRemaining = !areWaypointsRemaining;
+            #endregion
+        }
+
+        [ExecuteInEditMode]
+        private void OnValidate()
+        {
+            meshParentTransform = transform.Find("Mesh");
+
+            transform.name = $"NPC - {characterName}";
+
+            /*
+            if (meshParentTransform.childCount > 0)
+            {
+                foreach(Transform child in meshParentTransform)
+                    GameObject.DestroyImmediate(child);
+            }
+              
+            if(meshPrefab != null)
+            {
+                Transform mesh = Instantiate(meshPrefab, meshParentTransform) as Transform;
+                mesh.rotation = meshParentTransform.rotation;
+            }*/
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.white;
+            Gizmos.DrawWireCube(transform.position + Vector3.up, new Vector3(1, 2, 1));
+        }
+
+        #endregion
+
+        #region Public methods
+
+        public bool AreWaypointsRemaining()
+        {
+            return areWaypointsRemaining;
+        }
+
+        public bool InCombat()
+        {
+            return isInCombat;
+        }
+
+        public bool IsATaskBeingPerformed()
+        {
+            return isATaskBeingPerformed;
+        }
+
+        public bool IsDead()
+        {
+            return isDead;
+        }
+
+        #endregion
+    }
+}
+

@@ -7,7 +7,7 @@ namespace Mastered.Magisteros.BTwGraph
 {
     public class IsTaskEqualTo : ConditionNode
     {
-        public CharacterInformation.Task taskToCompare;
+        public CharacterInformation.Action taskToCompare;
 
         #region Overrides of Node
 
@@ -19,7 +19,7 @@ namespace Mastered.Magisteros.BTwGraph
         {
             if(runnerGmob.TryGetComponent<CharacterInformation>(out CharacterInformation CI))
             {
-                if (CI.currentTask == taskToCompare)
+                if (CI.currentAction == taskToCompare)
                     return State.Success;
             }
             return State.Failure;

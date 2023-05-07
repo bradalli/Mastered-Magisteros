@@ -7,7 +7,6 @@ using Mastered.Magisteros.NPC;
 [CreateAssetMenu(menuName = "FSM/Decisions/IsDeadDecision")]
 public class IsDeadDecision : Decision
 {
-    public KeyCode debugAdvanceKey;
     public override bool Decide(BaseStateMachine stateMachine)
     {
         bool decision = false;

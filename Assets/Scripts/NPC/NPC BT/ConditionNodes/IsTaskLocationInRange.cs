@@ -19,7 +19,7 @@ namespace Mastered.Magisteros.BTwGraph
         {
             if (runnerGmob.TryGetComponent<CharacterInformation>(out CharacterInformation CI))
             {
-                if (CI.currentTask != CharacterInformation.Task.Idle && Vector3.Distance(CI.taskPosition, CI.transform.position) <= range)
+                if (CI.currentAction != CharacterInformation.Action.Idle && Vector3.Distance(CI.taskPosition, CI.transform.position) <= range)
                     return State.Success;
             }
             return State.Failure;

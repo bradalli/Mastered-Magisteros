@@ -14,12 +14,17 @@ namespace Mastered.Magisteros.BT
 
     public class Node
     {
-        protected NodeState state;
+        public NodeState state;
         [HideInInspector]
         public Node parent;
         protected List<Node> children = new List<Node>();
 
         private Dictionary<string, object> _dataContext = new Dictionary<string, object>();
+
+        public void ManuallySetState(NodeState newState)
+        {
+            state = newState;
+        }
 
         public object GetData(string key)
         {

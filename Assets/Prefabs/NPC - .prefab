@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3065331149033423019}
   - component: {fileID: 3065331149033423020}
+  - component: {fileID: 1900948744177405822}
   - component: {fileID: 3065331149033423017}
   - component: {fileID: 3065331149033423016}
   m_Layer: 11
@@ -73,12 +74,26 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3065331149033423021}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08f601ed3b080c942a05e5ff2b28b2e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _initialState: {fileID: 11400000, guid: c3ed35a2a30c47e48a7a1eca1a32f95a, type: 2}
+--- !u!114 &1900948744177405822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3065331149033423021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe120e687c6f2e74ebce0cc5dd7551f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reset: 0
+  activeBehaviourTree: 0
 --- !u!114 &3065331149033423017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,7 +101,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3065331149033423021}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7299f3cb8c7462f4ca592e9f7884b43d, type: 3}
   m_Name: 
@@ -95,10 +110,10 @@ MonoBehaviour:
   characterName: 
   meshPrefab: {fileID: 0}
   isDead: 0
-  isATaskBeingPerformed: 0
+  isAnActionBeingPerformed: 0
   isInCombat: 0
   areWaypointsRemaining: 0
-  currentTask: 0
+  currentAction: 0
   taskPosition: {x: 0, y: 0, z: 0}
   viewTarget: {fileID: 0}
 --- !u!114 &3065331149033423016

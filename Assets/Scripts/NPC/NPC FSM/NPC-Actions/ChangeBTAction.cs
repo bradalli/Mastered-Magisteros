@@ -8,15 +8,14 @@ using Mastered.Magisteros.BTwGraph;
 [CreateAssetMenu(menuName = "FSM/Actions/ChangeBTAction")]
 public class ChangeBTAction : FSMAction
 {
-    public BehaviourTree newTree;
+    public NPCBT.BehaviourTree newTree;
     public override void Execute(BaseStateMachine stateMachine)
     {
-        var behaviourTreeRunner = stateMachine.GetComponent<BehaviourTreeRunner>();
-        if (behaviourTreeRunner.lastTree != newTree)
+        var behaviourTreeRunner = stateMachine.GetComponent<NPCBT>();
+        if (behaviourTreeRunner.activeBehaviourTree != newTree)
         {
-            Debug.Log($"Behaviour tree has changed from {behaviourTreeRunner.tree.name} to {newTree.name} at... {Time.time}");
-            behaviourTreeRunner.tree = newTree.Clone();
-            behaviourTreeRunner.lastTree = newTree;
+            Debug.Log($"Behaviour tree has changed from {behaviourTreeRunner.activeBehaviourTree} to {newTree} at... {Time.time}");
+            behaviourTreeRunner.ChangeTree(newTree);
         }
     }
 }

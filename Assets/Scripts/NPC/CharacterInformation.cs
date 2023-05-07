@@ -19,16 +19,16 @@ namespace Mastered.Magisteros.NPC
 
         [Header("Status Information")]
         public bool isDead;
-        public bool isATaskBeingPerformed;
+        public bool isAnActionBeingPerformed;
         public bool isInCombat;
         public bool areWaypointsRemaining;
 
-        [Header("Task Information")]
-        public Task currentTask;
+        [Header("Action Information")]
+        public Action currentAction;
         public Vector3 taskPosition;
         public Transform viewTarget;
 
-        public enum Task { Idle, Talk, Animation }
+        public enum Action { Null, Idle, Action, Talk, Animation }
 
         #endregion
 
@@ -52,7 +52,7 @@ namespace Mastered.Magisteros.NPC
                 isDead = !isDead;
 
             if (Input.GetKeyDown(KeyCode.Alpha2))
-                isATaskBeingPerformed = !isATaskBeingPerformed;
+                isAnActionBeingPerformed = !isAnActionBeingPerformed;
 
             if (Input.GetKeyDown(KeyCode.Alpha3))
                 isInCombat = !isInCombat;
@@ -105,7 +105,7 @@ namespace Mastered.Magisteros.NPC
 
         public bool IsATaskBeingPerformed()
         {
-            return isATaskBeingPerformed;
+            return isAnActionBeingPerformed;
         }
 
         public bool IsDead()

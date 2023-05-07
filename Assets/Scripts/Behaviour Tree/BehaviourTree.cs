@@ -8,6 +8,7 @@ namespace Mastered.Magisteros.BT
     public abstract class BehaviourTree : MonoBehaviour
     {
         private Node _root = null;
+        public bool reset = false;
 
         protected void Start()
         {
@@ -16,10 +17,17 @@ namespace Mastered.Magisteros.BT
 
         private void Update()
         {
-            if (_root != null)
+            if (_root != null && !reset)
+            {
                 _root.Evaluate();
-        }
+            } 
 
+            else if (reset)
+            {
+                _root = SetupTree();
+                reset = false;
+            }
+        }
         protected abstract Node SetupTree();
     }
 }

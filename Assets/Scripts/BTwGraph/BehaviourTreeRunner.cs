@@ -44,6 +44,7 @@ namespace Mastered.Magisteros.BTwGraph
             tree.rootNode = loop;
             */
             #endregion
+            tree.runnerGmob = this.gameObject;
             tree = tree.Clone();
         }
 

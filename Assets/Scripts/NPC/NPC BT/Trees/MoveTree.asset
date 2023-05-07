@@ -16,26 +16,7 @@ MonoBehaviour:
   started: 1
   guid: f92c5fb5587cd1444a492f4a3b80ef65
   position: {x: 0, y: 0}
-  runnerGmob: {fileID: 0}
-  child: {fileID: 0}
---- !u!114 &-1407190432893422987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3086c25d64b84144ab304ab2f203dfa9, type: 3}
-  m_Name: FallBackNode
-  m_EditorClassIdentifier: 
-  state: 0
-  started: 0
-  guid: 6a4692c23de4a4f49a78a44cb8c6e02e
-  position: {x: 0, y: 0}
-  runnerGmob: {fileID: 0}
-  children: []
+  child: {fileID: 5762743980292072298}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52,10 +33,64 @@ MonoBehaviour:
   treeState: 0
   nodes:
   - {fileID: -4531219324631314534}
-  - {fileID: 9062492310437170684}
-  - {fileID: -1407190432893422987}
-  runnerGmob: {fileID: 0}
---- !u!114 &9062492310437170684
+  - {fileID: 5762743980292072298}
+  - {fileID: 7225709206100654054}
+  - {fileID: 4586959827227486344}
+  - {fileID: 7951129351984943386}
+--- !u!114 &4586959827227486344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 431f1ecb217d8ae4e903f6b4e884b1f6, type: 3}
+  m_Name: WaitNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 1
+  guid: 730f0a1dbea4bc14a831b7a5306fd72b
+  position: {x: 569, y: -50}
+  duration: 1
+--- !u!114 &5762743980292072298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf124d303f16904698553c674ce137e, type: 3}
+  m_Name: RepeatNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 1
+  guid: 8957c9689a09fcd41be7c1446da722f7
+  position: {x: 195, y: 0}
+  child: {fileID: 7225709206100654054}
+--- !u!114 &7225709206100654054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6b9662c8a1278c45a65f962a15c0d8c, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 1
+  guid: 7a113257051bcff46b2b1713b225cd78
+  position: {x: 364, y: 0}
+  children:
+  - {fileID: 4586959827227486344}
+  - {fileID: 7951129351984943386}
+--- !u!114 &7951129351984943386
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -67,9 +102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8bbb3f42087a4946aa643c3fdd266de, type: 3}
   m_Name: DebugLogNode
   m_EditorClassIdentifier: 
-  state: 0
+  state: 1
   started: 0
-  guid: 5b79b5f941e7c4546b03dea4ee1b22a1
-  position: {x: 376.0501, y: -76.99999}
-  runnerGmob: {fileID: 0}
-  message: 
+  guid: 45a6af70207cfb8499b3caa3da870a3e
+  position: {x: 569, y: 58}
+  message: Move Message!

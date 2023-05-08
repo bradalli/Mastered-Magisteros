@@ -13,7 +13,7 @@ public class AggravatedDecision : Decision
         bool decision = false;
         // var characterInSight = stateMachine.GetComponent<CharacterSight>();
         // decision = characterInSight.Ping() && characterInSight.IsEnemyInSight();
-        var characterInfo = stateMachine.GetComponent<CharacterInformation>();
+        var characterInfo = stateMachine.GetComponent<Character>();
         decision = characterInfo.InCombat();
         return decision;
     }

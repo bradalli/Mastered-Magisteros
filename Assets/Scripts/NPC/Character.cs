@@ -6,11 +6,12 @@ using UnityEngine;
 
 namespace Mastered.Magisteros.NPC
 {
-    public class CharacterInformation : MonoBehaviour
+    public class Character : MonoBehaviour
     {
         #region Public variables
 
         [Header("Character Profile")]
+        public CharacterProfile profile;
         public Personality personality = Personality.Friendly;
         public string characterName = "NotYetAssigned";
         public UnityEngine.Object meshPrefab = null;

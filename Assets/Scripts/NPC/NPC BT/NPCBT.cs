@@ -83,27 +83,27 @@ public class NPCBT : BehaviourTree
         {
             new Sequence(new List<Node>
             {
-                // new CheckIsWaypointCountGreaterThanX(0),
+                // new CheckIsXOperationThanX(waypoints.length, Operation.Greater, 0),
 
                 new Selector(new List<Node>
                 {
                     // Patrol Sequence
                     new Sequence(new List<Node>
                     {
-                        // new CheckIsWaypointCountGreaterThanX(1),
+                        // new CheckIsXOperationThanX(waypoints.length, Operation.Less, 0),
 
                         new Selector(new List<Node>
                         {
                             new Sequence(new List<Node>
                             {
-                                // new CheckIsWPIndexLessThanCount(),
-                                // new TaskGoToPosition(waypoints(wpIndex)),
+                                // new CheckIsXOperationThanX(wpIndex, Operation.Less, waypoints.Length)
+                                // new TaskGoToPosition(waypoints(wpIndex).location),
                                 // new TaskIncrementWPIndex(),
 
                                 new Sequence(new List<Node>
                                 {
-                                    // new CheckHasWPAnAction(),
-                                    // new TaskSetCurrentAction(wpAction),
+                                    // new CheckHasWPAnAction(waypoints(wpIndex)),
+                                    // new TaskSetCurrentAction(waypoints(wpIndex).action),
                                     // new TaskSetParentState(actState)
                                 })
                             }),
@@ -112,7 +112,7 @@ public class NPCBT : BehaviourTree
                             {
                                 new Sequence(new List<Node>
                                 {
-                                    // new CheckIsWPMarkedLoop(wpIndex),
+                                    // new CheckIsWPMarkedLoop(waypoints(wpIndex)),
                                     // new TaskSetWPIndex(0)
                                 }),
                                 
@@ -131,12 +131,12 @@ public class NPCBT : BehaviourTree
                     // Travel Sequence
                     new Sequence(new List<Node>
                     {
-                        // new TaskGoToPosition(waypoints(0)),
+                        // new TaskGoToPosition(waypoints(0).location),
 
                         new Sequence(new List<Node>
                         {
-                            // new CheckHasWPAnAction(),
-                            // new TaskSetCurrentAction(wpAction),
+                            // new CheckHasWPAnAction(waypoints(wpIndex)),
+                            // new TaskSetCurrentAction(waypoints(wpIndex).action),
                             // new TaskSetParentState(actState)
                         })
                     })
@@ -156,22 +156,22 @@ public class NPCBT : BehaviourTree
             // Death Sequence
             new Sequence(new List<Node>
             {
-                // new CheckIsHPLessThanX(1),
+                // new CheckIsXOperationThanX(hp, Operation.Lesser, 1),
                 // new TaskTriggerDeathState()
             }),
 
             // Flee Sequence
             new Sequence(new List<Node>
             {
-                // new CheckIsHpLessThanX(hpFleeRange),
+                // new CheckIsXOperationThanX(hp, Operation.Lesser, hpFleeRange),
 
                 new Selector(new List<Node>
                 {
-                    // new CheckIsOwnerAlone(),
+                    // new CheckIsXAlone(ownerCharAwareness),
 
                     new Sequence(new List<Node>
                     {
-                        // new CheckIsHPLessThanX(hpWoundedRange),
+                        // new CheckIsXOperationThanX(hp, Operation.Lesser, hpWoundedRange),
                         // new TaskSetMoveSpeed(moveSpeedWounded)
                     })
                 }),
@@ -182,19 +182,19 @@ public class NPCBT : BehaviourTree
             // Ranged Attack Sequence
             new Sequence(new List<Node>
             {
-                // new CheckIsXTypeX(mainWeapon, WeaponType.Ranged),
+                // new CheckIsWeaponXTypeX(mainWeapon, WeaponType.Ranged),
 
                 new Selector(new List<Node>
                 {
                     new Sequence(new List<Node>
                     {
-                        // new CheckIsTargetInXRange(rangedAttackDistane),
-                        // new CheckIsItemCountGreaterThanX(itemType.Arrow, 0),
+                        // new CheckIsXInRangeToX(target, owner, rangedAttackDistane),
+                        // new CheckIsXOperationThanX(itemType.Arrow.Count, Operation.Greater, 0),
                         
                         new Sequence(new List<Node>
                         {
-                            // new CheckIsTimeSinceXGreaterThanX(timeLastAttack, delayRangedAttack),
-                            // new TaskAttackTarget(AttackType.Ranged)
+                            // new CheckHasTimeSinceXBeenX(timeLastAttack, delayRangedAttack),
+                            // new TaskAttackTarget(target, AttackType.Ranged)
                         })
                     }),
 
@@ -205,7 +205,7 @@ public class NPCBT : BehaviourTree
             // Melee Attack Sequence
             new Sequence(new List<Node>
             {
-                // new CheckIsXTypeX(mainWeapon, WeaponType.Melee),
+                // new CheckIsWeaponXTypeX(mainWeapon, WeaponType.Melee),
 
                 new Selector(new List<Node>
                 {
@@ -214,7 +214,7 @@ public class NPCBT : BehaviourTree
                     {
                         new Sequence(new List<Node>
                         {
-                            // new CheckIsTimeSinceXLessThanX(timeLastAttack, delayMeleeAttack),
+                            // new CheckIsXOperationThanX(timeLastAttack, Operation.Lesser, delayMeleeAttack, WaitMode.Until),
                             // new TaskMaintainDistanceFromTarget(target, evadeDistance)
                         }),
                     }),
@@ -229,7 +229,7 @@ public class NPCBT : BehaviourTree
                             // Block Sequence
                             new Sequence(new List<Node>
                             {
-                                // new CheckIsTargetAttackingOwner(),
+                                // new CheckIsTargetAttackingOwner(target),
                                 // new TaskWaitForSeconds(Random.Range(delayBlockReactionMin, delayBlockReactionMax)),
 
                                 new Selector(new List<Node>
@@ -245,7 +245,7 @@ public class NPCBT : BehaviourTree
                             // Attack Sequence
                             new Sequence(new List<Node>
                             {
-                                // new CheckIsTargetInXRange(meleeAttackDistance),
+                                // new CheckIsXInRangeToX(target, owner, meleeAttackDistance),
 
                                 new Selector(new List<Node>
                                 {

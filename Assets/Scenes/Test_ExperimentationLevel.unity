@@ -4806,6 +4806,10 @@ PrefabInstance:
       value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 3065331149033423017, guid: 578e2f8c4654e674b9fa19542106f5c2, type: 3}
+      propertyPath: profile
+      value: 
+      objectReference: {fileID: 11400000, guid: feeb6c69b6da3ff4c874b94bd81ed4be, type: 2}
+    - target: {fileID: 3065331149033423017, guid: 578e2f8c4654e674b9fa19542106f5c2, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}

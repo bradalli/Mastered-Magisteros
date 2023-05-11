@@ -16,7 +16,7 @@ namespace Mastered.Magisteros.NPC
 
         [Header("Stats")]
         [Range(1, 100)]
-        public int level = 1;
+        public int level = 5;
         [Range(1, 100)]
         public int baseHealth = 50;
         [Range(1, 100)]

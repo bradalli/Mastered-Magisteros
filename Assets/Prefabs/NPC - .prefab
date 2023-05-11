@@ -114,8 +114,8 @@ MonoBehaviour:
   isAnActionBeingPerformed: 0
   isInCombat: 0
   areWaypointsRemaining: 0
-  currentAction: 0
-  taskPosition: {x: 0, y: 0, z: 0}
+  currentActionName: 
+  actionPosition: {x: 0, y: 0, z: 0}
   viewTarget: {fileID: 0}
 --- !u!114 &3065331149033423016
 MonoBehaviour:

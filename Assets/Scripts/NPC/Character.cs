@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mastered.Magisteros.Actions;
 
 namespace Mastered.Magisteros.NPC
 {
@@ -25,11 +26,12 @@ namespace Mastered.Magisteros.NPC
         public bool areWaypointsRemaining;
 
         [Header("Action Information")]
-        public Action currentAction;
-        public Vector3 taskPosition;
-        public Transform viewTarget;
+        public string currentActionName;
+        public Vector3 actionPosition;
+        public CharacterAction currentAction;
 
-        public enum Action { Null, Idle, Action, Talk, Animation }
+        [Header("Miscellaneous")]
+        public Transform viewTarget;
 
         #endregion
 

@@ -13,7 +13,7 @@ namespace Mastered.Magisteros.Waypoints
         public bool isLoop = false;
         public bool isWander = false;
         public bool hasAction = false;
-        public Action action = new Action();
+        public CharacterAction action = new CharacterAction();
     }
 }
 

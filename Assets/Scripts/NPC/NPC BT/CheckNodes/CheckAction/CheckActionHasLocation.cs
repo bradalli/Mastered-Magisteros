@@ -1,18 +1,27 @@
+using Mastered.Magisteros.Actions;
+using Mastered.Magisteros.BT;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckActionHasLocation : MonoBehaviour
+public class CheckActionHasLocation : Node
 {
-    // Start is called before the first frame update
-    void Start()
+    private CharacterAction _action;
+
+    public CheckActionHasLocation(CharacterAction action)
     {
-        
+        _action = action;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override NodeState Evaluate()
     {
-        
+        if(_action.location != Vector3.zero)
+        {
+            state = NodeState.SUCCESS;
+            return state;
+        }
+
+        state = NodeState.FAILURE;
+        return state;
     }
 }

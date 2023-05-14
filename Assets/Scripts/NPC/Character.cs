@@ -19,6 +19,14 @@ namespace Mastered.Magisteros.NPC
 
         public enum Personality { Friendly, Hostile, Fearful }
 
+        [Header("Base Stats")]
+        public int baseHealth;
+        public int baseSpeed;
+
+        [Header("Current Stats")]
+        public int currHealth;
+        public int currSpeed;
+
         [Header("Status Information")]
         public bool isDead;
         public bool isAnActionBeingPerformed;
@@ -29,6 +37,14 @@ namespace Mastered.Magisteros.NPC
         public string currentActionName;
         public Vector3 actionPosition;
         public CharacterAction currentAction;
+
+        [Header("Combat Information")]
+        public bool isAttacking;
+        public Character combatTarget;
+        public float timeLastGivenAttack;
+        public Character charLastGivenAttack;
+        public float timeLastReceivedAttack;
+        public Character charLastReceivedAttack;
 
         [Header("Miscellaneous")]
         public Transform viewTarget;

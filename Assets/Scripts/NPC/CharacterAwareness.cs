@@ -25,11 +25,15 @@ namespace Mastered.Magisteros.NPC
         [SerializeField] Transform closestTargetInProximity;
         [SerializeField] Collider[] targetsInProximity;
 
+        [Header("Received Info")]
+        public int nearbyAlliesNum = 0;
+
         #endregion
 
         #region Private variables
 
         Transform characterHead;
+        Character character;
 
         #endregion
 
@@ -38,6 +42,7 @@ namespace Mastered.Magisteros.NPC
         private void Awake()
         {
             characterHead = transform.Find("Head");
+            character = GetComponent<Character>();
         }
 
         private void FixedUpdate()
@@ -47,6 +52,7 @@ namespace Mastered.Magisteros.NPC
             if(targetsInProximity.Length > 0)
             {
                 closestTargetInProximity = FindClosestTargetInProximity(targetsInProximity).transform;
+                nearbyAlliesNum = FindNumberOfAlliesInProximity(targetsInProximity);
 
                 targetsInView = FindTargetsInView(targetsInProximity);
                 closestTargetInView = FindClosestTargetInView(targetsInView);
@@ -127,7 +133,6 @@ namespace Mastered.Magisteros.NPC
 
             return closest;
         }
-
         List<Transform> FindTargetsInView(Collider[] targets)
         {
             List<Transform> targetsInView = new List<Transform>();
@@ -145,6 +150,22 @@ namespace Mastered.Magisteros.NPC
             }
 
             return targetsInView;
+        }
+        int FindNumberOfAlliesInProximity(Collider[] targets)
+        {
+            int allyNum = 0;
+
+            foreach(Collider target in targets)
+            {
+                target.TryGetComponent<Character>(out Character targetChar);
+
+                if(targetChar.personality == character.personality)
+                {
+                    allyNum++;
+                }
+            }
+
+            return allyNum;
         }
 
         #endregion

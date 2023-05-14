@@ -110,12 +110,22 @@ MonoBehaviour:
   personality: 0
   characterName: NotYetAssigned
   meshPrefab: {fileID: 0}
+  baseHealth: 0
+  baseSpeed: 0
+  currHealth: 0
+  currSpeed: 0
   isDead: 0
   isAnActionBeingPerformed: 0
   isInCombat: 0
   areWaypointsRemaining: 0
   currentActionName: 
   actionPosition: {x: 0, y: 0, z: 0}
+  isAttacking: 0
+  combatTarget: {fileID: 0}
+  timeLastGivenAttack: 0
+  charLastGivenAttack: {fileID: 0}
+  timeLastReceivedAttack: 0
+  charLastReceivedAttack: {fileID: 0}
   viewTarget: {fileID: 0}
 --- !u!114 &3065331149033423016
 MonoBehaviour:
@@ -142,3 +152,4 @@ MonoBehaviour:
   proximityRange: 20
   closestTargetInProximity: {fileID: 0}
   targetsInProximity: []
+  nearbyAlliesNum: 0

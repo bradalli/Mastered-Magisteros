@@ -1,18 +1,29 @@
+using Mastered.Magisteros.BT;
+using Mastered.Magisteros.NPC;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckIsCharacterThisType : MonoBehaviour
+public class CheckIsCharacterThisType : Node
 {
-    // Start is called before the first frame update
-    void Start()
+    private Character _character;
+    private Character.Personality _personality;
+
+    public CheckIsCharacterThisType(Character character, Character.Personality personality)
     {
-        
+        _character = character;
+        _personality = personality;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override NodeState Evaluate()
     {
-        
+        if(_character.personality == _personality)
+        {
+            state = NodeState.SUCCESS;
+            return state;
+        }
+
+        state = NodeState.FAILURE;
+        return state;
     }
 }

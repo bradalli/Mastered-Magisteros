@@ -1,18 +1,35 @@
+using Mastered.Magisteros.BT;
+using Mastered.Magisteros.NPC;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TaskTriggerAction : MonoBehaviour
+public class TaskTriggerAction : Node
 {
-    // Start is called before the first frame update
-    void Start()
+    public Character _character;
+
+    public TaskTriggerAction(Character character)
     {
-        
+        _character = character;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override NodeState Evaluate()
     {
-        
+        if (!_character.isAnActionBeingPerformed && _character.currentAction != null)
+        {
+            _character.currentAction.TriggerAction();
+            _character.isAnActionBeingPerformed = true;
+        }
+            
+
+        else if(_character.currentAction == null)
+        {
+            _character.isAnActionBeingPerformed = false;
+            state = NodeState.SUCCESS;
+            return state;
+        }
+
+        state = NodeState.RUNNING;
+        return state;
     }
 }

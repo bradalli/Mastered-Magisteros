@@ -94,6 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reset: 0
   activeBehaviourTree: 0
+  activeSequence: 0
 --- !u!114 &3065331149033423017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,12 +121,6 @@ MonoBehaviour:
   areWaypointsRemaining: 0
   currentActionName: 
   actionPosition: {x: 0, y: 0, z: 0}
-  isAttacking: 0
-  combatTarget: {fileID: 0}
-  timeLastGivenAttack: 0
-  charLastGivenAttack: {fileID: 0}
-  timeLastReceivedAttack: 0
-  charLastReceivedAttack: {fileID: 0}
   viewTarget: {fileID: 0}
 --- !u!114 &3065331149033423016
 MonoBehaviour:

@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class CheckIsCharAttackSuccess : Node
 {
-    private Character _character;
+    private CharacterCombat _character;
     private float _timeLastGivenAttack;
-    private Character _charLastGivenAttack;
+    private CharacterCombat _charLastGivenAttack;
 
-    public CheckIsCharAttackSuccess(Character character, float timeLastGivenAttack, Character charLastGivenAttack)
+    public CheckIsCharAttackSuccess(CharacterCombat character, float timeLastGivenAttack, CharacterCombat charLastGivenAttack)
     {
         _character = character;
         _timeLastGivenAttack = timeLastGivenAttack;

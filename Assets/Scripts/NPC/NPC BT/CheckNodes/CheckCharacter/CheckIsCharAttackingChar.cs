@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class CheckIsCharAttackingChar : Node
 {
-    private Character _character;
-    private Character _targetCharacter;
+    private CharacterCombat _character;
+    private CharacterCombat _targetCharacter;
 
-    public CheckIsCharAttackingChar(Character character, Character targetCharacter)
+    public CheckIsCharAttackingChar(CharacterCombat character, CharacterCombat targetCharacter)
     {
         _character = character;
         _targetCharacter = targetCharacter;
@@ -17,13 +17,10 @@ public class CheckIsCharAttackingChar : Node
 
     public override NodeState Evaluate()
     {
-        if (_character.isInCombat)
+        if (_character.isAttacking && _character.combatTarget == _targetCharacter)
         {
-            if(_character.isAttacking && _character.combatTarget == _targetCharacter)
-            {
-                state = NodeState.SUCCESS;
-                return state;
-            }
+            state = NodeState.SUCCESS;
+            return state;
         }
 
         state = NodeState.FAILURE;

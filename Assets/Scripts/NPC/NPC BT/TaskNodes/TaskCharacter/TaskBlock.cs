@@ -6,12 +6,13 @@ using UnityEngine;
 
 public class TaskBlock : Node
 {
-    public Character _ownerCharacter;
-    public Character _targetCharacter;
+    public CharacterCombat _ownerCharacter;
+    public CharacterCombat _targetCharacter;
 
-    public TaskBlock(Character ownerCharacter, Character targetCharacter)
+    public TaskBlock(CharacterCombat ownerCharacter, CharacterCombat targetCharacter)
     {
         _ownerCharacter = ownerCharacter;
+        _targetCharacter = targetCharacter;
     }
 
     public override NodeState Evaluate()

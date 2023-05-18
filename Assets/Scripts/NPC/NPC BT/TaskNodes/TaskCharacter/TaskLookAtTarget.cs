@@ -1,18 +1,25 @@
+using Mastered.Magisteros.BT;
+using Mastered.Magisteros.NPC;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TaskLookAtTarget : MonoBehaviour
+public class TaskLookAtTarget : Node
 {
-    // Start is called before the first frame update
-    void Start()
+    public Character _character;
+    public Transform _targetTransform;
+
+    public TaskLookAtTarget(Character character, Transform targetTransform)
     {
-        
+        _character = character;
+        _targetTransform = targetTransform;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override NodeState Evaluate()
     {
-        
+        _character.viewTarget = _targetTransform;
+
+        state = NodeState.SUCCESS;
+        return state;
     }
 }

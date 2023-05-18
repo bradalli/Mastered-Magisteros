@@ -38,19 +38,6 @@ namespace Mastered.Magisteros.NPC
         public Vector3 actionPosition;
         public CharacterAction currentAction;
 
-        [Header("Combat - Attack Information")]
-        public bool attemptAttack;
-        public bool isAttacking;
-        public Character combatTarget;
-        public float timeLastGivenAttack;
-        public Character charLastGivenAttack;
-        public float timeLastReceivedAttack;
-        public Character charLastReceivedAttack;
-
-        [Header("Combat - Block Information")]
-        public bool attemptBlock;
-        public bool isBlocking;
-
         [Header("Miscellaneous")]
         public Transform viewTarget;
 
@@ -135,16 +122,6 @@ namespace Mastered.Magisteros.NPC
         public bool IsDead()
         {
             return isDead;
-        }
-
-        public void AttackTarget(Character target)
-        {
-            isAttacking = true;
-        }
-
-        public void Block()
-        {
-            isBlocking = true;
         }
 
         #endregion

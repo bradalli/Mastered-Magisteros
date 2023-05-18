@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class CheckIsCharacterThisType : Node
 {
-    private Character _character;
-    private Character.Personality _personality;
+    private Mastered.Magisteros.NPC.Character _character;
+    private Mastered.Magisteros.NPC.Character.Personality _personality;
 
-    public CheckIsCharacterThisType(Character character, Character.Personality personality)
+    public CheckIsCharacterThisType(Mastered.Magisteros.NPC.Character character, Mastered.Magisteros.NPC.Character.Personality personality)
     {
         _character = character;
         _personality = personality;

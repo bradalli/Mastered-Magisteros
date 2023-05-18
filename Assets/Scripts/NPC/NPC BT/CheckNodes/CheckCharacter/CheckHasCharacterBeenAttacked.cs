@@ -7,9 +7,9 @@ using UnityEngine;
 public class CheckHasCharacterBeenAttacked : Node
 {
     private float _sinceTime;
-    private Character _character;
+    private CharacterCombat _character;
 
-    public CheckHasCharacterBeenAttacked(float sinceTime, Character character)
+    public CheckHasCharacterBeenAttacked(float sinceTime, CharacterCombat character)
     {
         _sinceTime = sinceTime;
         _character = character;

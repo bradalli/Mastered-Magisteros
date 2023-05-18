@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class TaskAttackCharacter : Node
 {
-    public Character _ownerCharacter;
+    public CharacterCombat _ownerCharacter;
     public Character _targetCharacter;
 
-    public TaskAttackCharacter(Character ownerCharacter, Character targetCharacter)
+    public TaskAttackCharacter(CharacterCombat ownerCharacter, Character targetCharacter)
     {
         _ownerCharacter = ownerCharacter;
         _targetCharacter = targetCharacter;

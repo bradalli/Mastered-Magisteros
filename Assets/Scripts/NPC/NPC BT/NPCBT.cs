@@ -11,6 +11,10 @@ public class NPCBT : BehaviourTree
     public enum BehaviourTree { Act, Move, Combat}
     public BehaviourTree activeBehaviourTree = BehaviourTree.Act;
 
+    public enum btSequences { Idle, Talking, Performing, Patrolling, Wandering, Travelling, Dead, Fleeing, 
+        WaitingRangeAttack, RangedAttack, WaitingMeleeAttack, Evading, Contacting, Blocking, MeleeAttack}
+    public btSequences activeSequence;
+
     #endregion
 
     #region Trees

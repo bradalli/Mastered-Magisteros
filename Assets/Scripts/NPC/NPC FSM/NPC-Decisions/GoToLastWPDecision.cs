@@ -11,7 +11,7 @@ public class GoToLastWPDecision : Decision
     public override bool Decide(BaseStateMachine stateMachine)
     {
         bool decision = false;
-        var characterInfo = stateMachine.GetComponent<Character>();
+        var characterInfo = stateMachine.GetComponent<Mastered.Magisteros.NPC.Character>();
         decision = !characterInfo.InCombat() && characterInfo.AreWaypointsRemaining();
         return decision;
     }

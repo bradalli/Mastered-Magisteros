@@ -7,7 +7,7 @@ using Mastered.Magisteros.Actions;
 
 namespace Mastered.Magisteros.NPC
 {
-    public class Character : MonoBehaviour
+    public class CharacterCombat : MonoBehaviour
     {
         #region Public variables
 
@@ -26,7 +26,6 @@ namespace Mastered.Magisteros.NPC
         [Header("Current Stats")]
         public int currHealth;
         public int currSpeed;
-        private float movementSpeed;
 
         [Header("Status Information")]
         public bool isDead;
@@ -105,11 +104,6 @@ namespace Mastered.Magisteros.NPC
 
         #region Public methods
 
-        public void Wander()
-        {
-
-        }
-
         public bool AreWaypointsRemaining()
         {
             return areWaypointsRemaining;
@@ -128,11 +122,6 @@ namespace Mastered.Magisteros.NPC
         public bool IsDead()
         {
             return isDead;
-        }
-
-        internal void SetMoveSpeed(float newSpeed)
-        {
-            movementSpeed = newSpeed;
         }
 
         #endregion

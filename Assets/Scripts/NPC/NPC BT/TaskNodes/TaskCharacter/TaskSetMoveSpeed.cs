@@ -1,24 +1,18 @@
-using Mastered.Magisteros.BT;
-using Mastered.Magisteros.NPC;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TaskSetMoveSpeed : Node
+public class TaskSetMoveSpeed : MonoBehaviour
 {
-    public Character _targetCharacter;
-    public float _newSpeed;
-
-    public TaskSetMoveSpeed(Character targetCharacter, float newSpeed)
+    // Start is called before the first frame update
+    void Start()
     {
-        _targetCharacter = targetCharacter;
-        _newSpeed = newSpeed;
+        
     }
 
-    public override NodeState Evaluate()
+    // Update is called once per frame
+    void Update()
     {
-        _targetCharacter.SetMoveSpeed(_newSpeed);
-        state = NodeState.SUCCESS;
-        return state;
+        
     }
 }

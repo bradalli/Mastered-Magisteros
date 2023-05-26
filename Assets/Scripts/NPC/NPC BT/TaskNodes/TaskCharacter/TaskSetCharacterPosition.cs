@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class TaskSetCharacterPosition : Node
 {
-    public Character _targetCharacter;
+    public Mastered.Magisteros.NPC.CharacterCombat _targetCharacter;
     public Vector3 _targetPosition;
 
-    public TaskSetCharacterPosition(Character targetCharacter, Vector3 targetPosition)
+    public TaskSetCharacterPosition(Mastered.Magisteros.NPC.CharacterCombat targetCharacter, Vector3 targetPosition)
     {
         _targetCharacter = targetCharacter;
         _targetPosition = targetPosition;

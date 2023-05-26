@@ -6,19 +6,18 @@ using Mastered.Magisteros.NPC;
 public class CharacterCombat : MonoBehaviour
 {
     #region Public Variables
-    [Header("Overview Information")]
+    [Header("State Information")]
     public combatState currentState = combatState.Idle;
-    public enum combatState { Idle, MaintainingDistance, EquipingWeapon, Attacking, Blocking, Staggered, Fleeing, Wounded, Dead }
-    public Weapon equipedWeapon;
+    public enum combatState { Idle, MaintainingDistance, Attacking, Blocking, Staggered, Fleeing, Wounded, Dead }
 
     [Header("Attacking")]
     //public bool attemptAttack;
     //public bool isAttacking;
-    public Character combatTarget;
+    public Mastered.Magisteros.NPC.CharacterCombat combatTarget;
     public float timeLastGivenAttack;
-    public Character charLastGivenAttack;
+    public Mastered.Magisteros.NPC.CharacterCombat charLastGivenAttack;
     public float timeLastReceivedAttack;
-    public Character charLastReceivedAttack;
+    public Mastered.Magisteros.NPC.CharacterCombat charLastReceivedAttack;
 
     [Header("Blocking")]
     //public bool attemptBlock;
@@ -35,17 +34,6 @@ public class CharacterCombat : MonoBehaviour
     #endregion
 
     #region Custom Methods
-    public void MaintainDistance()
-    {
-        currentState = combatState.MaintainingDistance;
-    }
-
-    public void EquipWeapon(Weapon newWeapon)
-    {
-        currentState = combatState.EquipingWeapon;
-        equipedWeapon = newWeapon;
-    }
-
     public void AttackTarget()
     {
         currentState = combatState.Attacking;
@@ -59,6 +47,11 @@ public class CharacterCombat : MonoBehaviour
     public void Stagger()
     {
         currentState = combatState.Staggered;
+    }
+
+    public void MaintainDistance()
+    {
+        currentState = combatState.MaintainingDistance;
     }
 
     public void Flee()

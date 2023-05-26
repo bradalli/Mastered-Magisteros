@@ -3,21 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mastered.Magisteros.NPC;
 
-public class CharacterCombat : MonoBehaviour
+public interface ICombat
+{
+    void AttackTarget();
+    void Block();
+    void Stagger();
+    void Flee();
+}
+
+public class CharacterCombat : MonoBehaviour, ICombat
 {
     #region Public Variables
-    [Header("State Information")]
+    [Header("Overview Information")]
     public combatState currentState = combatState.Idle;
-    public enum combatState { Idle, MaintainingDistance, Attacking, Blocking, Staggered, Fleeing, Wounded, Dead }
+    public enum combatState { Idle, MaintainingDistance, EquipingWeapon, Attacking, Blocking, Staggered, Fleeing, Wounded, Dead }
+    public Weapon equipedWeapon;
 
     [Header("Attacking")]
     //public bool attemptAttack;
     //public bool isAttacking;
-    public Mastered.Magisteros.NPC.CharacterCombat combatTarget;
+    public Character combatTarget;
     public float timeLastGivenAttack;
-    public Mastered.Magisteros.NPC.CharacterCombat charLastGivenAttack;
+    public Character charLastGivenAttack;
     public float timeLastReceivedAttack;
-    public Mastered.Magisteros.NPC.CharacterCombat charLastReceivedAttack;
+    public Character charLastReceivedAttack;
 
     [Header("Blocking")]
     //public bool attemptBlock;
@@ -34,6 +43,17 @@ public class CharacterCombat : MonoBehaviour
     #endregion
 
     #region Custom Methods
+    public void MaintainDistance()
+    {
+        currentState = combatState.MaintainingDistance;
+    }
+
+    public void EquipWeapon(Weapon newWeapon)
+    {
+        currentState = combatState.EquipingWeapon;
+        equipedWeapon = newWeapon;
+    }
+
     public void AttackTarget()
     {
         currentState = combatState.Attacking;
@@ -47,11 +67,6 @@ public class CharacterCombat : MonoBehaviour
     public void Stagger()
     {
         currentState = combatState.Staggered;
-    }
-
-    public void MaintainDistance()
-    {
-        currentState = combatState.MaintainingDistance;
     }
 
     public void Flee()

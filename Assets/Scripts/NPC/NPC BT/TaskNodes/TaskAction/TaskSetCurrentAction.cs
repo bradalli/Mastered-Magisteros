@@ -8,9 +8,9 @@ using UnityEngine;
 public class TaskSetCurrentAction : Node
 {
     public CharacterAction _action;
-    public Mastered.Magisteros.NPC.CharacterCombat _character;
+    public Character _character;
 
-    public TaskSetCurrentAction(CharacterAction action, Mastered.Magisteros.NPC.CharacterCombat character)
+    public TaskSetCurrentAction(CharacterAction action, Character character)
     {
         _action = action;
         _character = character;

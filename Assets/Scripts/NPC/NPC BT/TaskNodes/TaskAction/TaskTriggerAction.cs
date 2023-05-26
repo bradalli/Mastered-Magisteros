@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class TaskTriggerAction : Node
 {
-    public Mastered.Magisteros.NPC.CharacterCombat _character;
+    public Character _character;
 
-    public TaskTriggerAction(Mastered.Magisteros.NPC.CharacterCombat character)
+    public TaskTriggerAction(Character character)
     {
         _character = character;
     }

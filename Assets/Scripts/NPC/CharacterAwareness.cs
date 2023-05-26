@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
@@ -23,7 +24,7 @@ namespace Mastered.Magisteros.NPC
         [SerializeField] bool isATargetInProximity;
         public float proximityRange = 10f;
         [SerializeField] Transform closestTargetInProximity;
-        [SerializeField] Collider[] targetsInProximity;
+        [SerializeField] List<Collider> targetsInProximity;
 
         [Header("Received Info")]
         public int nearbyAlliesNum = 0;
@@ -32,8 +33,10 @@ namespace Mastered.Magisteros.NPC
 
         #region Private variables
 
+        Collider[] tempTargetsInProximity;
+        Collider myCollider;
         Transform characterHead;
-        CharacterCombat character;
+        Character character;
 
         #endregion
 
@@ -41,15 +44,22 @@ namespace Mastered.Magisteros.NPC
 
         private void Awake()
         {
+            myCollider = GetComponent<CapsuleCollider>();
             characterHead = transform.Find("Head");
-            character = GetComponent<CharacterCombat>();
+            character = GetComponent<Character>();
         }
 
         private void FixedUpdate()
         {
-            targetsInProximity = Physics.OverlapSphere(transform.position, proximityRange, proximityMask);
+            tempTargetsInProximity = Physics.OverlapSphere(transform.position, proximityRange, proximityMask);
+            targetsInProximity = tempTargetsInProximity.ToList<Collider>();
 
-            if(targetsInProximity.Length > 0)
+            if (targetsInProximity.Contains(myCollider))
+            {
+                targetsInProximity.Remove(myCollider);
+            }
+
+            if(targetsInProximity.Capacity > 0)
             {
                 closestTargetInProximity = FindClosestTargetInProximity(targetsInProximity).transform;
                 nearbyAlliesNum = FindNumberOfAlliesInProximity(targetsInProximity);
@@ -58,7 +68,7 @@ namespace Mastered.Magisteros.NPC
                 closestTargetInView = FindClosestTargetInView(targetsInView);
             }
 
-            isATargetInProximity = targetsInProximity.Length > 0;
+            isATargetInProximity = targetsInProximity.Capacity > 0;
             isATargetInView = targetsInView.Count > 0;
         }
 
@@ -97,7 +107,7 @@ namespace Mastered.Magisteros.NPC
 
         #region Custom methods
 
-        Collider FindClosestTargetInProximity(Collider[] targets)
+        Collider FindClosestTargetInProximity(List<Collider> targets)
         {
             Collider closest = null;
 
@@ -133,7 +143,7 @@ namespace Mastered.Magisteros.NPC
 
             return closest;
         }
-        List<Transform> FindTargetsInView(Collider[] targets)
+        List<Transform> FindTargetsInView(List<Collider> targets)
         {
             List<Transform> targetsInView = new List<Transform>();
 
@@ -151,13 +161,13 @@ namespace Mastered.Magisteros.NPC
 
             return targetsInView;
         }
-        int FindNumberOfAlliesInProximity(Collider[] targets)
+        int FindNumberOfAlliesInProximity(List<Collider> targets)
         {
             int allyNum = 0;
 
             foreach(Collider target in targets)
             {
-                target.TryGetComponent<CharacterCombat>(out CharacterCombat targetChar);
+                target.TryGetComponent<Character>(out Character targetChar);
 
                 if(targetChar.personality == character.personality)
                 {

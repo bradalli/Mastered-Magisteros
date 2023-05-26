@@ -5,26 +5,62 @@ using Mastered.Magisteros.NPC;
 
 public class CharacterCombat : MonoBehaviour
 {
-    [Header("Combat - Attack Information")]
-    public bool attemptAttack;
-    public bool isAttacking;
-    public Character combatTarget;
+    #region Public Variables
+    [Header("State Information")]
+    public combatState currentState = combatState.Idle;
+    public enum combatState { Idle, MaintainingDistance, Attacking, Blocking, Staggered, Fleeing, Wounded, Dead }
+
+    [Header("Attacking")]
+    //public bool attemptAttack;
+    //public bool isAttacking;
+    public Mastered.Magisteros.NPC.CharacterCombat combatTarget;
     public float timeLastGivenAttack;
-    public Character charLastGivenAttack;
+    public Mastered.Magisteros.NPC.CharacterCombat charLastGivenAttack;
     public float timeLastReceivedAttack;
-    public Character charLastReceivedAttack;
+    public Mastered.Magisteros.NPC.CharacterCombat charLastReceivedAttack;
 
-    [Header("Combat - Block Information")]
-    public bool attemptBlock;
-    public bool isBlocking;
+    [Header("Blocking")]
+    //public bool attemptBlock;
+    //public bool isBlocking;
 
-    public void AttackTarget(Character target)
+    [Header("Staggered State")]
+    //public bool isStaggered;
+    public float staggeredLength;
+    #endregion
+
+    #region Private Variables
+    private float staggeredStartTime;
+    private float staggeredTime;
+    #endregion
+
+    #region Custom Methods
+    public void AttackTarget()
     {
-        isAttacking = true;
+        currentState = combatState.Attacking;
     }
 
     public void Block()
     {
-        isBlocking = true;
+        currentState = combatState.Blocking;
     }
+
+    public void Stagger()
+    {
+        currentState = combatState.Staggered;
+    }
+
+    public void MaintainDistance()
+    {
+        currentState = combatState.MaintainingDistance;
+    }
+
+    public void Flee()
+    {
+        currentState = combatState.Fleeing;
+    }
+    #endregion
+
+    #region Coroutines
+
+    #endregion
 }

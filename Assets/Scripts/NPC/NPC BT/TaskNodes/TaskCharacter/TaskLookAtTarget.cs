@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class TaskLookAtTarget : Node
 {
-    public Character _character;
+    public Mastered.Magisteros.NPC.CharacterCombat _character;
     public Transform _targetTransform;
 
-    public TaskLookAtTarget(Character character, Transform targetTransform)
+    public TaskLookAtTarget(Mastered.Magisteros.NPC.CharacterCombat character, Transform targetTransform)
     {
         _character = character;
         _targetTransform = targetTransform;

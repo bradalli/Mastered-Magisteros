@@ -6,34 +6,32 @@ using UnityEngine;
 
 public class TaskAttackCharacter : Node
 {
-    public CharacterCombat _ownerCharacter;
-    public Character _targetCharacter;
+    public CharacterCombat _targetCharCombat;
+    private bool nodeEntered;
 
-    public TaskAttackCharacter(CharacterCombat ownerCharacter, Character targetCharacter)
+    public TaskAttackCharacter(CharacterCombat targetCharCombat)
     {
-        _ownerCharacter = ownerCharacter;
-        _targetCharacter = targetCharacter;
+        _targetCharCombat = targetCharCombat;
     }
 
     public override NodeState Evaluate()
     {
-        if (!_ownerCharacter.attemptAttack)
+        if (!nodeEntered && _targetCharCombat.currentState != CharacterCombat.combatState.Attacking)
         {
-            _ownerCharacter.AttackTarget(_targetCharacter);
-            _ownerCharacter.attemptAttack = true;
-        }
-
-        else if(_ownerCharacter.isAttacking)
-        {
+            nodeEntered = true;
+            _targetCharCombat.AttackTarget();
             state = NodeState.RUNNING;
+            return state;
         }
 
-        else
+        if (nodeEntered && _targetCharCombat.currentState != CharacterCombat.combatState.Attacking)
         {
+            nodeEntered = false;
             state = NodeState.SUCCESS;
-            _ownerCharacter.attemptAttack = false;
+            return state;
         }
 
+        state = NodeState.RUNNING;
         return state;
     }
 }

@@ -7,7 +7,7 @@ using Mastered.Magisteros.Actions;
 
 namespace Mastered.Magisteros.NPC
 {
-    public class Character : MonoBehaviour
+    public class CharacterCombat : MonoBehaviour
     {
         #region Public variables
 

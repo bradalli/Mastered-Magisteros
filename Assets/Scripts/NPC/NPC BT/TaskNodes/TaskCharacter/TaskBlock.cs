@@ -6,34 +6,33 @@ using UnityEngine;
 
 public class TaskBlock : Node
 {
-    public CharacterCombat _ownerCharacter;
-    public CharacterCombat _targetCharacter;
+    public CharacterCombat _targetCharCombat;
 
-    public TaskBlock(CharacterCombat ownerCharacter, CharacterCombat targetCharacter)
+    private bool nodeEntered;
+
+    public TaskBlock(CharacterCombat targetCharCombat)
     {
-        _ownerCharacter = ownerCharacter;
-        _targetCharacter = targetCharacter;
+        _targetCharCombat = targetCharCombat;
     }
 
     public override NodeState Evaluate()
     {
-        if (!_ownerCharacter.attemptBlock)
+        if (!nodeEntered && _targetCharCombat.currentState != CharacterCombat.combatState.Blocking)
         {
-            _ownerCharacter.Block();
-            _ownerCharacter.attemptBlock = true;
-        }
-
-        else if (_ownerCharacter.isBlocking)
-        {
+            nodeEntered = true;
+            _targetCharCombat.Block();
             state = NodeState.RUNNING;
+            return state;
         }
 
-        else
+        if (nodeEntered && _targetCharCombat.currentState != CharacterCombat.combatState.Blocking)
         {
+            nodeEntered = false;
             state = NodeState.SUCCESS;
-            _ownerCharacter.attemptBlock = false;
+            return state;
         }
 
+        state = NodeState.RUNNING;
         return state;
     }
 }

@@ -1,18 +1,25 @@
+using Mastered.Magisteros.BT;
+using Mastered.Magisteros.NPC;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TaskSetCharacterPosition : MonoBehaviour
+public class TaskSetCharacterPosition : Node
 {
-    // Start is called before the first frame update
-    void Start()
+    public Mastered.Magisteros.NPC.CharacterCombat _targetCharacter;
+    public Vector3 _targetPosition;
+
+    public TaskSetCharacterPosition(Mastered.Magisteros.NPC.CharacterCombat targetCharacter, Vector3 targetPosition)
     {
-        
+        _targetCharacter = targetCharacter;
+        _targetPosition = targetPosition;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override NodeState Evaluate()
     {
-        
+        _targetCharacter.transform.position = _targetPosition;
+
+        state = NodeState.SUCCESS;
+        return state;
     }
 }

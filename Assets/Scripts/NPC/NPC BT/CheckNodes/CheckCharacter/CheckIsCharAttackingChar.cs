@@ -17,7 +17,7 @@ public class CheckIsCharAttackingChar : Node
 
     public override NodeState Evaluate()
     {
-        if (_character.isAttacking && _character.combatTarget == _targetCharacter)
+        if (_character.currentState == CharacterCombat.combatState.Attacking && _character.combatTarget == _targetCharacter)
         {
             state = NodeState.SUCCESS;
             return state;

@@ -7,19 +7,22 @@ using UnityEngine.AI;
 
 public class TaskFleeFromCharacter : Node
 {
-    public NavMeshAgent _ownerNavMeshAgent;
-    public Mastered.Magisteros.NPC.Character _targetCharacter;
-    public float _desiredDistance;
+    //public NavMeshAgent _ownerNavMeshAgent;
+    public CharacterCombat _targetCharCombat;
+    //public float _desiredDistance;
 
-    public TaskFleeFromCharacter(NavMeshAgent ownerNavMeshAgent, Mastered.Magisteros.NPC.Character targetCharacter, float desiredDistance)
+    private bool nodeEntered;
+
+    public TaskFleeFromCharacter(NavMeshAgent ownerNavMeshAgent, CharacterCombat targetCharCombat, float desiredDistance)
     {
-        _ownerNavMeshAgent = ownerNavMeshAgent;
-        _targetCharacter = targetCharacter;
-        _desiredDistance = desiredDistance;
+        //_ownerNavMeshAgent = ownerNavMeshAgent;
+        _targetCharCombat = targetCharCombat;
+        //_desiredDistance = desiredDistance;
     }
 
     public override NodeState Evaluate()
     {
+        /*
         // Calculate vector and position away from the target character by the desired distance.
         Vector3 fleeVector = Vector3.Normalize(_ownerNavMeshAgent.transform.position - _targetCharacter.transform.position);
         Vector3 targetDestination = _targetCharacter.transform.position +
@@ -39,6 +42,24 @@ public class TaskFleeFromCharacter : Node
             state = NodeState.SUCCESS;
         }
 
+        return state;*/
+
+        if (!nodeEntered && _targetCharCombat.currentState != CharacterCombat.combatState.Fleeing)
+        {
+            nodeEntered = true;
+            _targetCharCombat.Flee();
+            state = NodeState.RUNNING;
+            return state;
+        }
+
+        if (nodeEntered && _targetCharCombat.currentState != CharacterCombat.combatState.Fleeing)
+        {
+            nodeEntered = false;
+            state = NodeState.SUCCESS;
+            return state;
+        }
+
+        state = NodeState.RUNNING;
         return state;
     }
 }

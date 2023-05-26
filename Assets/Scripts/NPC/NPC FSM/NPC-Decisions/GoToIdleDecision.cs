@@ -12,7 +12,7 @@ public class GoToIdleDecision : Decision
     public override bool Decide(BaseStateMachine stateMachine)
     {
         bool decision = false;
-        var characterInfo = stateMachine.GetComponent<Mastered.Magisteros.NPC.Character>();
+        var characterInfo = stateMachine.GetComponent<Mastered.Magisteros.NPC.CharacterCombat>();
         decision = !characterInfo.InCombat() && !characterInfo.AreWaypointsRemaining();
         return decision;
     }

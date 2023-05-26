@@ -33,7 +33,7 @@ namespace Mastered.Magisteros.NPC
         #region Private variables
 
         Transform characterHead;
-        Character character;
+        CharacterCombat character;
 
         #endregion
 
@@ -42,7 +42,7 @@ namespace Mastered.Magisteros.NPC
         private void Awake()
         {
             characterHead = transform.Find("Head");
-            character = GetComponent<Character>();
+            character = GetComponent<CharacterCombat>();
         }
 
         private void FixedUpdate()
@@ -157,7 +157,7 @@ namespace Mastered.Magisteros.NPC
 
             foreach(Collider target in targets)
             {
-                target.TryGetComponent<Character>(out Character targetChar);
+                target.TryGetComponent<CharacterCombat>(out CharacterCombat targetChar);
 
                 if(targetChar.personality == character.personality)
                 {

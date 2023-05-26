@@ -10,7 +10,7 @@ public class IsDeadDecision : Decision
     public override bool Decide(BaseStateMachine stateMachine)
     {
         bool decision = false;
-        var characterInfo = stateMachine.GetComponent<Mastered.Magisteros.NPC.Character>();
+        var characterInfo = stateMachine.GetComponent<Mastered.Magisteros.NPC.CharacterCombat>();
         decision = characterInfo.IsDead();
         return decision;
     }

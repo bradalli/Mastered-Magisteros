@@ -3,32 +3,31 @@ using Mastered.Magisteros.NPC;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class TaskWander : Node
 {
-    public CharacterCore _targetChar;
+    public NPCharacter _character;
     private bool nodeEntered;
 
-    public TaskWander(CharacterCore targetChar)
+    public TaskWander(NPCharacter character)
     {
-        _targetChar = targetChar;
+        _character = character;
     }
 
     public override NodeState Evaluate()
     {
-        if (!nodeEntered && _targetChar.currentState != CharacterCombat.combatState.Attacking)
+        if (_character.activeState != NPCharacter.states.Wander)
         {
-            nodeEntered = true;
-            _targetChar.AttackTarget();
-            state = NodeState.RUNNING;
-            return state;
+            _character.WanderStart();
+            return NodeState.RUNNING;
         }
 
-        if (nodeEntered && _targetChar.currentState != CharacterCombat.combatState.Attacking)
+
+        if (_character.activeState == NPCharacter.states.Wander && _character.activeStateStatus == NPCharacter.stateStatus.Exiting)
         {
-            nodeEntered = false;
-            state = NodeState.SUCCESS;
-            return state;
+            _character.WanderEnd();
+            return NodeState.SUCCESS;
         }
 
         state = NodeState.RUNNING;

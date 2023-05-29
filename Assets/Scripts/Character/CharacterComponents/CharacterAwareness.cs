@@ -32,7 +32,7 @@ namespace Mastered.Magisteros.NPC
         #endregion
 
         #region Private variables
-
+        NPCharacter npChar;
         Collider[] tempTargetsInProximity;
         Collider myCollider;
         Transform characterHead;
@@ -44,6 +44,7 @@ namespace Mastered.Magisteros.NPC
 
         private void Awake()
         {
+            npChar = GetComponent<NPCharacter>();
             myCollider = GetComponent<CapsuleCollider>();
             characterHead = transform.Find("Head");
             character = GetComponent<CharacterCore>();
@@ -167,12 +168,15 @@ namespace Mastered.Magisteros.NPC
 
             foreach(Collider target in targets)
             {
-                target.TryGetComponent<CharacterCore>(out CharacterCore targetChar);
-
-                if(targetChar.personality == character.personality)
+                target.TryGetComponent<NPCharacter>(out NPCharacter targetChar);
+                if(targetChar != null)
                 {
-                    allyNum++;
+                    if (targetChar.GetPersonality() == npChar.GetPersonality())
+                    {
+                        allyNum++;
+                    }
                 }
+                
             }
 
             return allyNum;

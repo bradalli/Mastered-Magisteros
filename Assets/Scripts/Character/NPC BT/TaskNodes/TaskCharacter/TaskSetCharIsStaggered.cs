@@ -2,30 +2,28 @@ using Mastered.Magisteros.BT;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class TaskSetCharIsStaggered : Node
 {
-    public CharacterCombat _targetCharCombat;
-    private bool nodeEntered;
+    public NPCharacter _character;
 
-    public TaskSetCharIsStaggered(CharacterCombat targetCharCombat)
+    public TaskSetCharIsStaggered(NPCharacter character)
     {
-        _targetCharCombat = targetCharCombat;
+        _character = character;
     }
 
     public override NodeState Evaluate()
     {
-        if (!nodeEntered && _targetCharCombat.currentState != CharacterCombat.combatState.Staggered)
+        if (_character.activeState != NPCharacter.states.Stagger)
         {
-            nodeEntered = true;
-            _targetCharCombat.Stagger();
-            state = NodeState.RUNNING;
-            return state;
+            _character.StaggerStart();
         }
 
-        if (nodeEntered && _targetCharCombat.currentState != CharacterCombat.combatState.Staggered)
+
+        if (_character.activeState == NPCharacter.states.Stagger && _character.activeStateStatus == NPCharacter.stateStatus.Exiting)
         {
-            nodeEntered = false;
+            _character.StaggerEnd();
             state = NodeState.SUCCESS;
             return state;
         }

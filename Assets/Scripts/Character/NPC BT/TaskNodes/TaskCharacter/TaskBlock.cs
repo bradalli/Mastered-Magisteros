@@ -3,31 +3,30 @@ using Mastered.Magisteros.NPC;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class TaskBlock : Node
 {
-    public CharacterCombat _targetCharCombat;
+    public NPCharacter _character;
 
     private bool nodeEntered;
 
-    public TaskBlock(CharacterCombat targetCharCombat)
+    public TaskBlock(NPCharacter character)
     {
-        _targetCharCombat = targetCharCombat;
+        _character = character;
     }
 
     public override NodeState Evaluate()
     {
-        if (!nodeEntered && _targetCharCombat.currentState != CharacterCombat.combatState.Blocking)
+        if (_character.activeState != NPCharacter.states.MeleeBlock && _character.GetCombatTargetChar() != null)
         {
-            nodeEntered = true;
-            _targetCharCombat.Block();
-            state = NodeState.RUNNING;
-            return state;
+            _character.MeleeBlockStart();
         }
 
-        if (nodeEntered && _targetCharCombat.currentState != CharacterCombat.combatState.Blocking)
+
+        if (_character.activeState == NPCharacter.states.MeleeBlock && _character.activeStateStatus == NPCharacter.stateStatus.Exiting)
         {
-            nodeEntered = false;
+            _character.MeleeBlockEnd();
             state = NodeState.SUCCESS;
             return state;
         }

@@ -2,32 +2,30 @@ using Mastered.Magisteros.BT;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class TaskSetMainWeapon : Node
 {
-    public CharacterCombat _targetCharCombat;
+    public NPCharacter _character;
     public Weapon _newWeapon;
-    private bool nodeEntered;
 
-    public TaskSetMainWeapon(CharacterCombat targetCharCombat, Weapon newWeapon)
+    public TaskSetMainWeapon(NPCharacter character, Weapon newWeapon)
     {
-        _targetCharCombat = targetCharCombat;
+        _character = character;
         _newWeapon = newWeapon;
     }
 
     public override NodeState Evaluate()
     {
-        if (!nodeEntered && _targetCharCombat.currentState != CharacterCombat.combatState.EquipingWeapon)
+        if (_character.activeState != NPCharacter.states.EquippingWeapon)
         {
-            nodeEntered = true;
-            _targetCharCombat.EquipWeapon(_newWeapon);
-            state = NodeState.RUNNING;
-            return state;
+            _character.EquipWeaponStart(_newWeapon);
         }
 
-        if (nodeEntered && _targetCharCombat.currentState != CharacterCombat.combatState.EquipingWeapon)
+
+        if (_character.activeState == NPCharacter.states.EquippingWeapon && _character.activeStateStatus == NPCharacter.stateStatus.Exiting)
         {
-            nodeEntered = false;
+            _character.EquipWeaponEnd(_newWeapon);
             state = NodeState.SUCCESS;
             return state;
         }

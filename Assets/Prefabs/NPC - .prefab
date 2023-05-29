@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 3065331149033423019}
   - component: {fileID: 3065331149033423020}
   - component: {fileID: 1900948744177405822}
-  - component: {fileID: 3065331149033423017}
+  - component: {fileID: 4860958977547759460}
   - component: {fileID: 3065331149033423016}
   m_Layer: 11
   m_Name: 'NPC - '
@@ -95,7 +95,7 @@ MonoBehaviour:
   reset: 0
   activeBehaviourTree: 0
   activeSequence: 0
---- !u!114 &3065331149033423017
+--- !u!114 &4860958977547759460
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,24 +104,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 3065331149033423021}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c24caf11920d6284dac0b1fe709986cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d38010414a17724b9036aa0bb1e5b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile: {fileID: 0}
-  personality: 0
-  characterName: NotYetAssigned
-  meshPrefab: {fileID: 0}
   baseHealth: 0
   baseSpeed: 0
   currHealth: 0
   currSpeed: 0
-  isDead: 0
-  isAnActionBeingPerformed: 0
-  isInCombat: 0
-  areWaypointsRemaining: 0
   currentActionName: 
   actionPosition: {x: 0, y: 0, z: 0}
   viewTarget: {fileID: 0}
+  unityActionList: []
+  profile: {fileID: 0}
+  characterName: NotYetAssigned
+  meshPrefab: {fileID: 0}
+  activeStateStatus: 0
+  activeState: 0
 --- !u!114 &3065331149033423016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,6 +132,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a26fb6e98d71b864bb84758adc126b06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseHealth: 0
+  baseSpeed: 0
+  currHealth: 0
+  currSpeed: 0
+  currentActionName: 
+  actionPosition: {x: 0, y: 0, z: 0}
+  viewTarget: {fileID: 0}
+  unityActionList: []
   viewConeFov: 70
   viewConeMaxDistance: 15
   isATargetInView: 0

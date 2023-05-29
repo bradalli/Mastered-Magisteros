@@ -1,3 +1,4 @@
+using Mastered.Magisteros.Actions;
 using Mastered.Magisteros.NPC;
 using System;
 using System.Collections;
@@ -7,32 +8,41 @@ using UnityEngine;
 [RequireComponent(typeof(NPCBT))]
 public class NPCharacter : CharacterCore
 {
+    #region Private varaibles
     private NPCBT behaviourTree;
+    private Transform meshParentTransform;
+    #endregion
+
+    #region Public variables
+
     [Header("Character Profile")]
     public CharacterProfile profile;
     public string characterName = "NotYetAssigned";
     public UnityEngine.Object meshPrefab = null;
-    Transform meshParentTransform;
-
     public enum stateStatus { Entering, Running, Exiting}
     public stateStatus activeStateStatus;
-
     public enum states { Idle, Talk, Act, Patrol, Wander, Travel, Die, Flee, RangeAttack, 
-        MeleeEvade, MeleeContact, MeleeBlock, MeleeAttack, Stagger, EquippingWeapon }
+        MeleeEvade, MeleeContact, MeleeBlock, MeleeAttack, Stagger, EquippingWeapon, ChangingParentState, Wait, SetWpIndex}
     public states activeState = states.Idle;
+    #endregion
 
     #region Event Actions
-    //Acting
+    // Miscellaneous
+    public event Action<NPCBT.BehaviourTree> onSetParentStateStart, onSetParentStateEnd;
+    public event Action<float> onWaitForSecondsStart, onWaitForSecondsEnd;
+    public event Action<int> onSetWpIndexStart, onSetWpIndexEnd;
+
+    // Acting
     public event Action onIdleStart, onIdleEnd;
     public event Action onTalkStart, onTalkEnd;
     public event Action onActStart, onActEnd;
 
-    //Movement
+    // Movement
     public event Action onPatrolStart, onPatrolEnd;
     public event Action onWanderStart, onWanderEnd;
     public event Action onTravelStart, onTravelEnd;
 
-    //Combat
+    // Combat
     public event Action onDieStart, onDieEnd;
     public event Action<CharacterCore, float> onFleeStart, onFleeEnd;
     public event Action onRangeAttackStart, onRangeAttackEnd;
@@ -48,12 +58,18 @@ public class NPCharacter : CharacterCore
     #region Delegates
     public delegate bool BoolCheck();
     public BoolCheck checkIsInCombat;
+    public BoolCheck checkAreWaypointsRemaining;
+    public BoolCheck checkIsAnActionBeingPerfomed;
 
     public delegate Personality.personalityTypes PersonalityCheck();
     public PersonalityCheck checkPersonality;
 
     public delegate CharacterCore CharacterCheck();
     public CharacterCheck checkCombatTargetChar;
+    public CharacterCheck checkClosestChar;
+
+    public delegate CharacterAction CharActionCheck();
+    public CharActionCheck checkCurrCharAction;
     #endregion
 
     #region MonoBehaviour Methods
@@ -81,6 +97,14 @@ public class NPCharacter : CharacterCore
     #region Custom Methods
 
     #region Event action Methods
+    // Miscellaneous
+    public void SetParentStateStart(NPCBT.BehaviourTree newTree) => onSetParentStateStart?.Invoke(newTree);
+    public void SetParentStateEnd(NPCBT.BehaviourTree newTree) => onSetParentStateEnd?.Invoke(newTree);
+    public void WaitForSecondsStart(float seconds) => onWaitForSecondsStart?.Invoke(seconds);
+    public void WaitForSecondsEnd(float seconds) => onWaitForSecondsEnd?.Invoke(seconds);
+    public void SetWpIndexStart(int index) => onSetWpIndexStart?.Invoke(index);
+    public void SetWpIndexEnd(int index) => onSetWpIndexEnd?.Invoke(index);
+
     // Acting
     public void IdleStart() => onIdleStart?.Invoke(); 
     public void IdleEnd() => onIdleEnd?.Invoke();
@@ -121,18 +145,12 @@ public class NPCharacter : CharacterCore
 
     #region Delegate check methods
     public override bool IsInCombat() => checkIsInCombat.Invoke();
+    public bool AreWaypointsRemaining() => checkAreWaypointsRemaining.Invoke();
+    public bool IsAnActionBeingPerfomed() => checkIsAnActionBeingPerfomed.Invoke();
     public Personality.personalityTypes GetPersonality() => checkPersonality.Invoke();
     public CharacterCore GetCombatTargetChar() => checkCombatTargetChar.Invoke();
-
-    internal bool AreWaypointsRemaining()
-    {
-        throw new NotImplementedException();
-    }
-
-    internal bool IsATaskBeingPerformed()
-    {
-        throw new NotImplementedException();
-    }
+    public CharacterCore GetClosestCharacter() => checkClosestChar.Invoke();
+    public CharacterAction GetCurrCharAction() => checkCurrCharAction.Invoke();
     #endregion
 
     #endregion

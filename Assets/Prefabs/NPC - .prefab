@@ -94,7 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reset: 0
   activeBehaviourTree: 0
-  activeSequence: 0
+  charSelf: {fileID: 0}
 --- !u!114 &4860958977547759460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,6 +113,7 @@ MonoBehaviour:
   currSpeed: 0
   currentActionName: 
   actionPosition: {x: 0, y: 0, z: 0}
+  currentAction: {fileID: 0}
   viewTarget: {fileID: 0}
   unityActionList: []
   profile: {fileID: 0}
@@ -138,6 +139,7 @@ MonoBehaviour:
   currSpeed: 0
   currentActionName: 
   actionPosition: {x: 0, y: 0, z: 0}
+  currentAction: {fileID: 0}
   viewTarget: {fileID: 0}
   unityActionList: []
   viewConeFov: 70

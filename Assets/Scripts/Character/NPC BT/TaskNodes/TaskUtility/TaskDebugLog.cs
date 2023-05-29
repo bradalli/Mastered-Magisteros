@@ -17,7 +17,7 @@ public class TaskDebugLog : Node
     {
         Debug.Log($"TaskDebugLog: {_message}");
 
-        state = NodeState.RUNNING;
+        state = NodeState.SUCCESS;
         return state;
     }
 }

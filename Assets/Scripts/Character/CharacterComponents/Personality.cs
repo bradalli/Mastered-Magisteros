@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Personality
 {
-    public enum personalityTypes { Friendly, Hostile, Fearful}
+    public enum personalityTypes { Friendly, Hostile, Fearful, Player}
 }

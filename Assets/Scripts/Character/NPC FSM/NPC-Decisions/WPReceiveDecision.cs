@@ -12,7 +12,7 @@ public class WPReceiveDecision : Decision
     {
         bool decision = false;
         var characterInfo = stateMachine.GetComponent<NPCharacter>();
-        decision = characterInfo.AreWaypointsRemaining() && !characterInfo.IsATaskBeingPerformed();
+        decision = characterInfo.AreWaypointsRemaining() && !characterInfo.IsAnActionBeingPerfomed();
         return decision;
     }
 }

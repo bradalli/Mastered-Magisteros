@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mastered.Magisteros.BT;
 using Mastered.Magisteros.FSM;
+using Mastered.Magisteros.Actions;
 
+[RequireComponent(typeof(NPCharacter))]
 public class NPCBT : BehaviourTree
 {
     #region Public variables
@@ -11,15 +13,17 @@ public class NPCBT : BehaviourTree
     public enum BehaviourTree { Act, Move, Combat}
     public BehaviourTree activeBehaviourTree = BehaviourTree.Act;
 
-    public enum btSequences { Idle, Talking, Performing, Patrolling, Wandering, Travelling, Dead, Fleeing, 
-        WaitingRangeAttack, RangedAttack, WaitingMeleeAttack, Evading, Contacting, Blocking, MeleeAttack}
-    public btSequences activeSequence;
+    #endregion
 
+    #region Private variables
+    public NPCharacter charSelf;
     #endregion
 
     #region Trees
 
-    Node actTree = new Selector(new List<Node>
+    Node ActTree()
+    {
+        return new Selector(new List<Node>
     {
         new TaskDebugLog("Running act behaviour tree!"),
 
@@ -27,27 +31,37 @@ public class NPCBT : BehaviourTree
         new Sequence(new List<Node>
         {
             // new CheckIsActionNull(currentAction),
+            new CheckIsActionThisType(charSelf.GetCurrCharAction(), CharacterAction.ActionType.Empty),
             // new TaskPlayAnimation("Idle")
+            new TaskTriggerAction(charSelf)
         }),
 
         // Talk Sequence
         new Sequence(new List<Node>
         {
             // new CheckIsActionThisType(currentAction, "Talk"),
+            new CheckIsActionThisType(charSelf.GetCurrCharAction(), CharacterAction.ActionType.Talk),
             // new TaskLookAtTarget(target),
+            new TaskLookAtTarget(charSelf, charSelf.GetClosestCharacter().transform),
+
             new Selector(new List<Node>
-            { 
+            {
                 new Sequence(new List<Node>
                 {
                     // new CheckIsTargetThisType(target, "Player"),
+                    new CheckIsCharacterThisType(charSelf, Personality.personalityTypes.Player),
                     // new TaskEnterDialogueWithPlayer(),
+                    new TaskTriggerAction(charSelf),
                     // new TaskReturnToPreviousState(previousState)
+                    new TaskSetCurrentAction(new CharacterAction(), charSelf),
                 }),
 
                 new Sequence(new List<Node>
                 {
                     // new TaskEnterDialogueWithTarget(target),
+                    new TaskTriggerAction(charSelf),
                     // new TaskReturnToPreviousState(previousState)
+                    new TaskSetCurrentAction(new CharacterAction(), charSelf)
                 })
             })
         }),
@@ -58,29 +72,39 @@ public class NPCBT : BehaviourTree
             new Sequence(new List<Node>
             {
                 // new CheckActionHasLocation(currentAction),
+                new CheckActionHasLocation(charSelf.GetCurrCharAction()),
 
                 new Selector(new List<Node>
                 {
                     new Sequence(new List<Node>
                     {
                         // new CheckIsOwnerInRange(transform.position, currentAction.location, maxRange),
+                        new CheckIsOperationThan(Vector3.Distance(charSelf.transform.position, charSelf.GetCurrCharAction().location), 
+                        CheckIsOperationThan.operationTypes.LessThan, charSelf.GetCurrCharAction().range),
                         // new TaskTriggerAction(currentAction)
+                        new TaskTriggerAction(charSelf),
                     }),
 
                     new Sequence(new List<Node>
                     {
                         // new TaskSetOwnerPositionTeleport(currentAction.location),
+                        new TaskSetCharacterPosition(charSelf, charSelf.GetCurrCharAction().location),
                         // new TaskTriggerAction(currentAction)
+                        new TaskTriggerAction(charSelf),
                     })
                 })
             }),
 
             // new TaskTriggerAction(currentAction)
+            new TaskTriggerAction(charSelf),
         })
     });
+    }
 
-    Node moveTree = new Selector(new List<Node>
+    Node MoveTree()
     {
+        return new Selector(new List<Node>
+        {
         new TaskDebugLog("Running move behaviour tree!"),
 
         new Selector(new List<Node>
@@ -148,11 +172,14 @@ public class NPCBT : BehaviourTree
             }),
 
             // new TaskSetParentState(actState)
-        })
-    });
+            })
+        });
+    }
 
-    Node combatTree = new Selector(new List<Node>
+    Node CombatTree()
     {
+        return new Selector(new List<Node>
+        {
         new TaskDebugLog("Running combat behaviour tree!"),
 
         new Selector(new List<Node>
@@ -267,7 +294,8 @@ public class NPCBT : BehaviourTree
                 })
             })
         })
-    });
+        });
+    }
 
     #endregion
 
@@ -280,19 +308,19 @@ public class NPCBT : BehaviourTree
         switch (activeBehaviourTree)
         {
             case BehaviourTree.Act:
-                root = actTree;
+                root = ActTree();
                 break;
 
             case BehaviourTree.Move:
-                root = moveTree;
+                root = MoveTree();
                 break;
 
             case BehaviourTree.Combat:
-                root = combatTree;
+                root = CombatTree();
                 break;
 
             default:
-                root = actTree;
+                root = ActTree();
                 break;
         }
 
@@ -311,5 +339,12 @@ public class NPCBT : BehaviourTree
         SetupTree();
     }
 
+    #endregion
+
+    #region MonoBehaviour
+    private void Awake()
+    {
+        charSelf = GetComponent<NPCharacter>();
+    }
     #endregion
 }

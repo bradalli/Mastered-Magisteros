@@ -1712,6 +1712,64 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11eaff3508ad6394b85eb631e468de85, type: 3}
+--- !u!1 &736080858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 736080861}
+  - component: {fileID: 736080860}
+  - component: {fileID: 736080859}
+  m_Layer: 0
+  m_Name: Test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &736080859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736080858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1677ee7ffd08f9641b9b2c589d2c2b5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testString: THIS
+--- !u!114 &736080860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736080858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d54c32fdd3226fa41b5ad5542be890ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &736080861
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736080858}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.8324295, y: -11.405583, z: -4.1745763}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &763228583
 GameObject:
   m_ObjectHideFlags: 0
@@ -3893,7 +3951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e85312c866d5a1a43b0a677ee9571f37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tree: {fileID: 11400000, guid: ef79c58c8d349b046abd2267d7d23e67, type: 2}
+  tree: {fileID: 0}
   lastTree: {fileID: 0}
 --- !u!4 &1994547796
 Transform:
@@ -4822,7 +4880,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3065331149033423021, guid: 578e2f8c4654e674b9fa19542106f5c2, type: 3}
       propertyPath: m_Name
-      value: NPC - Fred the Orc
+      value: NPC - NotYetAssigned
+      objectReference: {fileID: 0}
+    - target: {fileID: 3065331149033423021, guid: 578e2f8c4654e674b9fa19542106f5c2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3065331149214229166, guid: 578e2f8c4654e674b9fa19542106f5c2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4832,6 +4894,7 @@ PrefabInstance:
     - {fileID: 3065331149214229163, guid: 578e2f8c4654e674b9fa19542106f5c2, type: 3}
     - {fileID: 3065331149214229164, guid: 578e2f8c4654e674b9fa19542106f5c2, type: 3}
     - {fileID: 3065331149214229165, guid: 578e2f8c4654e674b9fa19542106f5c2, type: 3}
+    - {fileID: 3065331149033423017, guid: 578e2f8c4654e674b9fa19542106f5c2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 578e2f8c4654e674b9fa19542106f5c2, type: 3}
 --- !u!1001 &3125221733962364694
 PrefabInstance:

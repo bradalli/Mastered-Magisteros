@@ -3,30 +3,29 @@ using Mastered.Magisteros.NPC;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class TaskAttackCharacter : Node
 {
-    public CharacterCombat _targetCharCombat;
+    public NPCharacter _character;
     private bool nodeEntered;
 
-    public TaskAttackCharacter(CharacterCombat targetCharCombat)
+    public TaskAttackCharacter(NPCharacter character)
     {
-        _targetCharCombat = targetCharCombat;
+        _character = character;
     }
 
     public override NodeState Evaluate()
     {
-        if (!nodeEntered && _targetCharCombat.currentState != CharacterCombat.combatState.Attacking)
+        if (_character.activeState != NPCharacter.states.Act && _character.currentAction != null)
         {
-            nodeEntered = true;
-            _targetCharCombat.AttackTarget();
-            state = NodeState.RUNNING;
-            return state;
+            _character.ActStart();
         }
 
-        if (nodeEntered && _targetCharCombat.currentState != CharacterCombat.combatState.Attacking)
+
+        if (_character.activeState == NPCharacter.states.Act && _character.activeStateStatus == NPCharacter.stateStatus.Exiting)
         {
-            nodeEntered = false;
+            _character.ActEnd();
             state = NodeState.SUCCESS;
             return state;
         }

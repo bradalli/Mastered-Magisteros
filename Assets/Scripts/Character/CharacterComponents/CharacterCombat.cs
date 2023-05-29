@@ -16,8 +16,7 @@ public class CharacterCombat : CharacterCore
 
     #region Public Variables
     [Header("Overview Information")]
-    public combatState currentState = combatState.Idle;
-    public enum combatState { Idle, MaintainingDistance, EquipingWeapon, Attacking, Blocking, Staggered, Fleeing, Wounded, Dead }
+    public Personality.personalityTypes personality = Personality.personalityTypes.Friendly;
     public Weapon equipedWeapon;
 
     [Header("Attacking")]
@@ -44,36 +43,7 @@ public class CharacterCombat : CharacterCore
     #endregion
 
     #region Custom Methods
-    public void MaintainDistance()
-    {
-        currentState = combatState.MaintainingDistance;
-    }
-
-    public void EquipWeapon(Weapon newWeapon)
-    {
-        currentState = combatState.EquipingWeapon;
-        equipedWeapon = newWeapon;
-    }
-
-    public void AttackTarget()
-    {
-        currentState = combatState.Attacking;
-    }
-
-    public void Block()
-    {
-        currentState = combatState.Blocking;
-    }
-
-    public void Stagger()
-    {
-        currentState = combatState.Staggered;
-    }
-
-    public void Flee()
-    {
-        currentState = combatState.Fleeing;
-    }
+    
     #endregion
 
     #region Coroutines

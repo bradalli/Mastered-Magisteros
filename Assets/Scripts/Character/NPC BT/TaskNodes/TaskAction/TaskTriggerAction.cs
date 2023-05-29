@@ -6,25 +6,24 @@ using UnityEngine;
 
 public class TaskTriggerAction : Node
 {
-    public CharacterCore _character;
+    public NPCharacter _character;
 
-    public TaskTriggerAction(CharacterCore character)
+    public TaskTriggerAction(NPCharacter character)
     {
         _character = character;
     }
 
     public override NodeState Evaluate()
     {
-        if (!_character.isAnActionBeingPerformed && _character.currentAction != null)
+        if (_character.activeState != NPCharacter.states.Act && _character.currentAction != null)
         {
-            _character.currentAction.TriggerAction();
-            _character.isAnActionBeingPerformed = true;
+            _character.ActStart();
         }
             
 
-        else if(_character.currentAction == null)
+        if(_character.activeState == NPCharacter.states.Act && _character.activeStateStatus == NPCharacter.stateStatus.Exiting)
         {
-            _character.isAnActionBeingPerformed = false;
+            _character.ActEnd();
             state = NodeState.SUCCESS;
             return state;
         }

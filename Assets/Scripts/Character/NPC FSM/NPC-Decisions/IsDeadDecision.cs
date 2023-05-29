@@ -10,8 +10,8 @@ public class IsDeadDecision : Decision
     public override bool Decide(BaseStateMachine stateMachine)
     {
         bool decision = false;
-        var characterInfo = stateMachine.GetComponent<CharacterCore>();
-        decision = characterInfo.IsDead();
+        var character = stateMachine.GetComponent<CharacterCore>();
+        decision = character.IsDead();
         return decision;
     }
 }

@@ -41,6 +41,20 @@ namespace Mastered.Magisteros.NPC
         {
             movementSpeed = newSpeed;
         }
+        public virtual bool IsDead()
+        {
+            if(currHealth <= 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public virtual bool IsInCombat()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

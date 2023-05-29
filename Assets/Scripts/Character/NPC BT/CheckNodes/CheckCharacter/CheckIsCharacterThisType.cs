@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class CheckIsCharacterThisType : Node
 {
-    private CharacterCore _character;
-    private CharacterCore.Personality _personality;
+    private NPCharacter _character;
+    private Personality.personalityTypes _personality;
 
-    public CheckIsCharacterThisType(CharacterCore character, CharacterCore.Personality personality)
+    public CheckIsCharacterThisType(NPCharacter character, Personality.personalityTypes personality)
     {
         _character = character;
         _personality = personality;
@@ -17,7 +17,7 @@ public class CheckIsCharacterThisType : Node
 
     public override NodeState Evaluate()
     {
-        if(_character.personality == _personality)
+        if(_character.GetPersonality() == _personality)
         {
             state = NodeState.SUCCESS;
             return state;

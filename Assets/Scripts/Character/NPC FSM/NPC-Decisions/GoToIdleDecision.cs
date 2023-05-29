@@ -12,8 +12,8 @@ public class GoToIdleDecision : Decision
     public override bool Decide(BaseStateMachine stateMachine)
     {
         bool decision = false;
-        var characterInfo = stateMachine.GetComponent<CharacterCore>();
-        decision = !characterInfo.InCombat() && !characterInfo.AreWaypointsRemaining();
+        var characterInfo = stateMachine.GetComponent<NPCharacter>();
+        decision = !characterInfo.IsInCombat() && !characterInfo.AreWaypointsRemaining();
         return decision;
     }
 }

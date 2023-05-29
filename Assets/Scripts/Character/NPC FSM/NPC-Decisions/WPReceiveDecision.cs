@@ -11,7 +11,7 @@ public class WPReceiveDecision : Decision
     public override bool Decide(BaseStateMachine stateMachine)
     {
         bool decision = false;
-        var characterInfo = stateMachine.GetComponent<CharacterCore>();
+        var characterInfo = stateMachine.GetComponent<NPCharacter>();
         decision = characterInfo.AreWaypointsRemaining() && !characterInfo.IsATaskBeingPerformed();
         return decision;
     }

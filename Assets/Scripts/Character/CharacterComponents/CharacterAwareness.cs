@@ -167,12 +167,15 @@ namespace Mastered.Magisteros.NPC
 
             foreach(Collider target in targets)
             {
-                target.TryGetComponent<CharacterCore>(out CharacterCore targetChar);
-
-                if(targetChar.personality == character.personality)
+                target.TryGetComponent<CharacterCombat>(out CharacterCombat targetChar);
+                if(targetChar != null)
                 {
-                    allyNum++;
+                    if (targetChar.personality == character.personality)
+                    {
+                        allyNum++;
+                    }
                 }
+                
             }
 
             return allyNum;

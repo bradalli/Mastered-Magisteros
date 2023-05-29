@@ -70,6 +70,13 @@ public class NPCharacter : CharacterCore
 
     public delegate CharacterAction CharActionCheck();
     public CharActionCheck checkCurrCharAction;
+
+    public delegate int IntCheck();
+    public IntCheck checkWaypointsLength;
+    public IntCheck checkCurrWaypointIndex;
+
+    public delegate Vector3 Vec3Check();
+    public Vec3Check checkTargetLocation;
     #endregion
 
     #region MonoBehaviour Methods
@@ -151,6 +158,9 @@ public class NPCharacter : CharacterCore
     public CharacterCore GetCombatTargetChar() => checkCombatTargetChar.Invoke();
     public CharacterCore GetClosestCharacter() => checkClosestChar.Invoke();
     public CharacterAction GetCurrCharAction() => checkCurrCharAction.Invoke();
+    public int GetWaypointsLength() => checkWaypointsLength.Invoke();
+    public int GetCurrWpIndex() => checkCurrWaypointIndex.Invoke();
+    public Vector3 GetTargetLocation() => checkTargetLocation.Invoke();
     #endregion
 
     #endregion

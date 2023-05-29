@@ -112,21 +112,27 @@ public class NPCBT : BehaviourTree
             new Sequence(new List<Node>
             {
                 // new CheckIsXOperationThanX(waypoints.length, Operation.Greater, 0),
+                new CheckIsOperationThan(charSelf.GetWaypointsLength(), CheckIsOperationThan.operationTypes.GreaterThan, 0),
 
                 new Selector(new List<Node>
                 {
                     // Patrol Sequence
                     new Sequence(new List<Node>
                     {
-                        // new CheckIsXOperationThanX(waypoints.length, Operation.Less, 0),
+                        // new CheckIsXOperationThanX(waypoints.length, Operation.Less, 1),
+                        new CheckIsOperationThan(charSelf.GetWaypointsLength(), CheckIsOperationThan.operationTypes.GreaterOrEqual, 1),
 
                         new Selector(new List<Node>
                         {
                             new Sequence(new List<Node>
                             {
                                 // new CheckIsXOperationThanX(wpIndex, Operation.Less, waypoints.Length)
+                                new CheckIsOperationThan(charSelf.GetCurrWpIndex(), CheckIsOperationThan.operationTypes.LessThan,
+                                charSelf.GetWaypointsLength()),
                                 // new TaskGoToPosition(waypoints(wpIndex).location),
+                                new TaskGoToPosition(charSelf, charSelf.GetTargetLocation(), NPCharacter.states.Patrol),
                                 // new TaskIncrementWPIndex(),
+                                new TaskSetWPIndex(charSelf, charSelf.GetCurrWpIndex() + 1),
 
                                 new Sequence(new List<Node>
                                 {

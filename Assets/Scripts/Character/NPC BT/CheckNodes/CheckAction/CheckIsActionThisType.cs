@@ -8,16 +8,24 @@ public class CheckIsActionThisType : Node
 {
     private CharacterAction _action;
     private CharacterAction.ActionType _type;
+    private bool _invert;
 
-    public CheckIsActionThisType(CharacterAction action, CharacterAction.ActionType type)
+    public CheckIsActionThisType(CharacterAction action, CharacterAction.ActionType type, bool invert)
     {
         _action = action;
         _type = type;
+        _invert = invert;
     }
 
     public override NodeState Evaluate()
     {
-        if(_action.type == _type)
+        if(_action.type == _type && !_invert)
+        {
+            state = NodeState.SUCCESS;
+            return state;
+        }
+
+        if (_action.type != _type && _invert)
         {
             state = NodeState.SUCCESS;
             return state;

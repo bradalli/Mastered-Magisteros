@@ -4,6 +4,7 @@ using UnityEngine;
 using Mastered.Magisteros.BT;
 using Mastered.Magisteros.FSM;
 using Mastered.Magisteros.Actions;
+using System;
 
 [RequireComponent(typeof(NPCharacter))]
 public class NPCBT : BehaviourTree
@@ -31,7 +32,7 @@ public class NPCBT : BehaviourTree
         new Sequence(new List<Node>
         {
             // new CheckIsActionNull(currentAction),
-            new CheckIsActionThisType(charSelf.GetCurrCharAction(), CharacterAction.ActionType.Empty),
+            new CheckIsActionThisType(charSelf.GetCurrCharAction(), CharacterAction.ActionType.Empty, false),
             // new TaskPlayAnimation("Idle")
             new TaskTriggerAction(charSelf)
         }),
@@ -40,7 +41,7 @@ public class NPCBT : BehaviourTree
         new Sequence(new List<Node>
         {
             // new CheckIsActionThisType(currentAction, "Talk"),
-            new CheckIsActionThisType(charSelf.GetCurrCharAction(), CharacterAction.ActionType.Talk),
+            new CheckIsActionThisType(charSelf.GetCurrCharAction(), CharacterAction.ActionType.Talk, false),
             // new TaskLookAtTarget(target),
             new TaskLookAtTarget(charSelf, charSelf.GetClosestCharacter().transform),
 
@@ -130,15 +131,18 @@ public class NPCBT : BehaviourTree
                                 new CheckIsOperationThan(charSelf.GetCurrWpIndex(), CheckIsOperationThan.operationTypes.LessThan,
                                 charSelf.GetWaypointsLength()),
                                 // new TaskGoToPosition(waypoints(wpIndex).location),
-                                new TaskGoToPosition(charSelf, charSelf.GetTargetLocation(), NPCharacter.states.Patrol),
+                                new TaskGoToPosition(charSelf, charSelf.GetTargetWaypoint().location, NPCharacter.states.Patrol),
                                 // new TaskIncrementWPIndex(),
                                 new TaskSetWPIndex(charSelf, charSelf.GetCurrWpIndex() + 1),
 
                                 new Sequence(new List<Node>
                                 {
                                     // new CheckHasWPAnAction(waypoints(wpIndex)),
+                                    new CheckIsActionThisType(charSelf.GetTargetWaypoint().action, CharacterAction.ActionType.Empty, true),
                                     // new TaskSetCurrentAction(waypoints(wpIndex).action),
+                                    new TaskSetCurrentAction(charSelf.GetTargetWaypoint().action, charSelf),
                                     // new TaskSetParentState(actState)
+                                    new TaskSetParentState(charSelf, BehaviourTree.Act),
                                 })
                             }),
 
@@ -147,10 +151,13 @@ public class NPCBT : BehaviourTree
                                 new Sequence(new List<Node>
                                 {
                                     // new CheckIsWPMarkedLoop(waypoints(wpIndex)),
+                                    new CheckIsOperationThan(Convert.ToSingle(charSelf.GetTargetWaypoint().isLoop), CheckIsOperationThan.operationTypes.EqualTo, 1),
                                     // new TaskSetWPIndex(0)
+                                    new TaskSetWPIndex(charSelf, 0),
                                 }),
                                 
                                 // new TaskSetParentState(actState)
+                                new TaskSetParentState(charSelf, BehaviourTree.Act),
                             })
                         })
                     }),
@@ -159,25 +166,32 @@ public class NPCBT : BehaviourTree
                     new Sequence(new List<Node>
                     {
                         // new CheckIsWanderX(true),
+                        new CheckIsWpWander(charSelf.GetTargetWaypoint()),
                         // new TaskGoWander(waypoints(0))
+                        new TaskWander(charSelf),
                     }),
 
                     // Travel Sequence
                     new Sequence(new List<Node>
                     {
                         // new TaskGoToPosition(waypoints(0).location),
+                        new TaskGoToPosition(charSelf, charSelf.GetTargetWaypoint().location, NPCharacter.states.Travel),
 
                         new Sequence(new List<Node>
                         {
                             // new CheckHasWPAnAction(waypoints(wpIndex)),
+                            new CheckIsActionThisType(charSelf.GetTargetWaypoint().action, CharacterAction.ActionType.Empty, true),
                             // new TaskSetCurrentAction(waypoints(wpIndex).action),
+                            new TaskSetCurrentAction(charSelf.GetTargetWaypoint().action, charSelf),
                             // new TaskSetParentState(actState)
+                            new TaskSetParentState(charSelf, BehaviourTree.Act),
                         })
                     })
                 })
             }),
 
             // new TaskSetParentState(actState)
+            new TaskSetParentState(charSelf, BehaviourTree.Act),
             })
         });
     }

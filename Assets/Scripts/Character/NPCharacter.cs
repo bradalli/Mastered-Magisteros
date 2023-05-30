@@ -1,5 +1,6 @@
 using Mastered.Magisteros.Actions;
 using Mastered.Magisteros.NPC;
+using Mastered.Magisteros.Waypoints;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -75,8 +76,8 @@ public class NPCharacter : CharacterCore
     public IntCheck checkWaypointsLength;
     public IntCheck checkCurrWaypointIndex;
 
-    public delegate Vector3 Vec3Check();
-    public Vec3Check checkTargetLocation;
+    public delegate Waypoint WaypointCheck();
+    public WaypointCheck checkTargetWaypoint;
     #endregion
 
     #region MonoBehaviour Methods
@@ -160,7 +161,7 @@ public class NPCharacter : CharacterCore
     public CharacterAction GetCurrCharAction() => checkCurrCharAction.Invoke();
     public int GetWaypointsLength() => checkWaypointsLength.Invoke();
     public int GetCurrWpIndex() => checkCurrWaypointIndex.Invoke();
-    public Vector3 GetTargetLocation() => checkTargetLocation.Invoke();
+    public Waypoint GetTargetWaypoint() => checkTargetWaypoint.Invoke();
     #endregion
 
     #endregion
